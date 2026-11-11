@@ -1,0 +1,65 @@
+{
+  "config": {
+    "alimentacion": 17000,
+    "valorJornal": 65000
+  },
+  "plantillas": [
+    {
+      "epp": "Guantes de nitrilo, botas",
+      "especificacion": "Aplicar en media luna alrededor del tallo, a unos 20 cm, sobre suelo húmedo y sin lluvia fuerte. Dosis por planta = dosis por hectárea ÷ plantas del lote. Iniciar por la parte alta del lote. Ajuste la dosis según el análisis de suelo.",
+      "herramientas": "Balde, medidor de dosis, costales",
+      "id": "tplref1",
+      "insumos": [
+        {
+          "cantHa": 450,
+          "costoUnit": 3250,
+          "nombre": "Fertilizante NPK 17-6-18",
+          "unidad": "kg"
+        }
+      ],
+      "jornalesHa": 2.5,
+      "nombre": "Fertilización edáfica (referencia)",
+      "tipo": "Fertilización edáfica"
+    },
+    {
+      "epp": "Careta, protector auditivo, guantes, botas, polainas",
+      "especificacion": "Guadañar calles y plateo a ras sin herir tallos ni raíces superficiales. Dejar el material picado como cobertura. No guadañar en pendientes fuertes con suelo mojado.",
+      "herramientas": "Guadaña, lima, cuchilla de repuesto",
+      "id": "tplref2",
+      "insumos": [
+        {
+          "cantHa": 2,
+          "costoUnit": 16500,
+          "nombre": "Gasolina",
+          "unidad": "galón"
+        },
+        {
+          "cantHa": 0.25,
+          "costoUnit": 32000,
+          "nombre": "Aceite 2T",
+          "unidad": "litro"
+        }
+      ],
+      "jornalesHa": 3,
+      "nombre": "Control de malezas con guadaña (referencia)",
+      "tipo": "Control de malezas (guadaña)"
+    },
+    {
+      "epp": "Guantes de nitrilo, gafas, tapabocas, overol, botas",
+      "especificacion": "Aplicar en las primeras horas de la mañana, cubriendo el envés de las hojas. Calibrar la bomba antes de iniciar. Suspender con viento o lluvia.",
+      "herramientas": "Bomba de espalda calibrada, balde de mezcla, agitador",
+      "id": "tplref3",
+      "insumos": [
+        {
+          "cantHa": 3,
+          "costoUnit": 28000,
+          "nombre": "Fertilizante foliar",
+          "unidad": "litro"
+        }
+      ],
+      "jornalesHa": 1,
+      "nombre": "Fertilización foliar (referencia)",
+      "tipo": "Fertilización foliar"
+    }
+  ]
+}

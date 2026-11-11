@@ -1,0 +1,51 @@
+  <!-- ======================= VISTA: MAPA Y MUESTREOS ======================= -->
+  <section class="view" id="view-mapa">
+    <div class="chip-row">
+      <select id="mp-lote" onchange="mapaCambiarLote(this.value)" aria-label="Lote"></select>
+      <div class="mp-actions">
+        <button class="btn ghost small" onclick="abrirDisenoLote()">Diseño del lote</button>
+        <button class="btn ghost small" onclick="abrirPlanMuestreo()">Plan de muestreo</button>
+        <button class="btn primary small" onclick="abrirRegistroMuestreo()">+ Registrar muestreo</button>
+      </div>
+    </div>
+    <div class="mapa-layout">
+      <div class="card mapa-card">
+        <div class="mapa-toolbar">
+          <div class="capas" id="mp-capas" role="tablist" aria-label="Capa del mapa"></div>
+          <span class="mp-plan-chip" id="mp-plan-chip" hidden></span>
+        </div>
+        <div class="mapa-wrap" id="mapa-wrap">
+          <canvas id="mapa-canvas" aria-label="Mapa del lote con surcos y plantas"></canvas>
+          <div class="mapa-zoom">
+            <button class="icon-btn" onclick="mapaZoom(1.35)" aria-label="Acercar">+</button>
+            <button class="icon-btn" onclick="mapaZoom(1/1.35)" aria-label="Alejar">−</button>
+            <button class="icon-btn" onclick="mapaAjustar()" aria-label="Ajustar a la pantalla" style="font-size:12px;">⤢</button>
+          </div>
+          <div class="mapa-tip" id="mapa-tip" hidden></div>
+          <div class="mapa-vacio" id="mapa-vacio" hidden></div>
+        </div>
+        <div class="mapa-legend" id="mp-leyenda"></div>
+      </div>
+      <div class="mapa-side">
+        <div class="card"><div class="title">Planta seleccionada</div><div id="mp-planta"><p class="hint" style="margin:0;">Toca una planta del mapa para ver su código, su historial y marcarla.</p></div></div>
+        <div class="card"><div class="title">Estado del lote</div><div id="mp-lote-info"></div></div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px;">
+      <div class="title">Muestreos y floraciones del lote <span class="sub">Promedios por campaña de muestreo</span></div>
+      <div class="tscroll"><table class="dtable" id="tabla-muestreos"></table></div>
+    </div>
+    <div class="card" style="margin-top:16px;">
+      <div class="title">Parámetros de referencia</div>
+      <p class="hint">Valores de referencia para semáforos y proyección. Ajústelos con su asistente técnico o con la recomendación vigente para su zona.</p>
+      <div class="fgrid c4" style="align-items:end;">
+        <label class="f">Umbral de broca (%)<input id="mc-broca" type="number" step="0.1"></label>
+        <label class="f">Umbral de roya (%)<input id="mc-roya" type="number" step="0.5"></label>
+        <label class="f">Peso de una cereza (g)<input id="mc-gfruto" type="number" step="0.1"></label>
+        <label class="f">Factor cereza → pergamino<input id="mc-factor" type="number" step="0.1"></label>
+        <label class="f">Días de floración a cosecha<input id="mc-dias" type="number" step="1"></label>
+        <button class="btn primary small" onclick="guardarParametrosMapa()">Guardar parámetros</button>
+      </div>
+    </div>
+  </section>
+

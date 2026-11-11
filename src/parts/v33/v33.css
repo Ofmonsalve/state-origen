@@ -1,0 +1,6 @@
+/* ================= v33 · Gráficas más legibles ================= */
+.g19 .g-ax { font:500 11px var(--f-body); font-variant-numeric:tabular-nums; letter-spacing:0; }
+.g19 .g-fuerte { font-weight:700; }
+.g19 rect[data-tip] { rx:3px; transition:opacity .15s ease; }
+.g22 .ax22 { font:500 11px var(--f-body); font-variant-numeric:tabular-nums; }
+.g19 .g-grid { stroke-dasharray:2 4; }

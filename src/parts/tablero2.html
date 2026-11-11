@@ -1,0 +1,68 @@
+      <!-- ======================= VISTA: TABLERO ======================= -->
+      <section class="view" id="view-tablero">
+        <div class="tb-head">
+          <div class="capas" id="tb-periodos" role="tablist" aria-label="Periodo"></div>
+          <div class="chip-row" style="margin:0;"><select id="tb-finca" onchange="tbSt.finca=this.value;renderTablero()" aria-label="Finca"></select></div>
+          <span id="tb-conf"></span>
+          <button class="btn ghost small" onclick="abrirMetas()">Referencias y metas</button>
+          <span class="tb-rango" id="tb-rango"></span>
+        </div>
+        <nav class="tb-nav" aria-label="Secciones del tablero">
+          <button onclick="irSeccionTb('sec-resumen')">Resumen</button><button onclick="irSeccionTb('sec-rent')">Rentabilidad</button><button onclick="irSeccionTb('sec-prod')">Producción</button><button onclick="irSeccionTb('sec-lotes')">Lotes</button><button onclick="irSeccionTb('sec-personas')">Personas</button><button onclick="irSeccionTb('sec-caja')">Caja y bodega</button><button onclick="irSeccionTb('sec-proy')">Proyección</button><button onclick="irSeccionTb('sec-oper')">Operación</button><button onclick="irSeccionTb('sec-datos')">Calidad de los datos</button>
+        </nav>
+        <div id="sec-resumen" class="tb-sec">
+          <div class="tb-lectura card"><div class="tb-eyebrow">Lectura del periodo</div><p id="tb-lectura"></p></div>
+          <div class="kpis" id="tb-kpis"></div>
+        </div>
+        <div id="sec-rent" class="tb-sec">
+          <h2 class="tb-h">Rentabilidad <span>¿Cuánto deja cada carga y cada hectárea?</span></h2>
+          <div class="tb-grid">
+            <div class="card tb-span2"><div class="title">Estado de resultados del periodo</div><div class="tscroll"><table class="dtable er" id="tb-er"></table></div></div>
+            <div class="card"><div class="title">Punto de equilibrio</div><div id="tb-eq"></div></div>
+          </div>
+          <div class="card" style="margin-bottom:16px;"><div class="title">Simulador: ¿qué pasa si cambia el precio o la tarifa? <span class="sub">No modifica sus datos</span></div><div id="tb-sim"></div></div>
+        </div>
+        <div id="sec-prod" class="tb-sec">
+          <h2 class="tb-h">Producción y costos <span>Volumen, conversión y a dónde va el dinero</span></h2>
+          <div class="tb-grid">
+            <div class="card tb-span2"><div class="title">Cereza recolectada <span class="sub">por lote, con el promedio del periodo</span></div><div class="mapa-legend tb-leg" id="tb-cosecha-leg"></div><div id="tb-cosecha"></div></div>
+            <div class="card"><div class="title">En qué se va el dinero</div><div id="tb-costos"></div></div>
+          </div>
+          <div class="card" style="margin-bottom:16px;"><div class="title">Conversión de cereza a pergamino</div><div id="tb-conv" class="tb-cols"></div></div>
+        </div>
+        <div id="sec-lotes" class="tb-sec">
+          <h2 class="tb-h">Lotes <span>Dónde invertir, renovar o intervenir</span></h2>
+          <div class="card" style="margin-bottom:16px;"><div class="tscroll"><table class="dtable" id="tb-lotes"></table></div><p class="hint" id="tb-lotes-nota" style="margin:12px 0 0;"></p></div>
+        </div>
+        <div id="sec-personas" class="tb-sec">
+          <h2 class="tb-h">Personas <span>Productividad y costo de la mano de obra</span></h2>
+          <div class="tb-grid">
+            <div class="card tb-span2"><div class="title">Productividad de recolectores</div><div id="tb-rec"></div></div>
+            <div class="card"><div class="title">Mano de obra de recolección</div><div id="tb-mo"></div></div>
+          </div>
+        </div>
+        <div id="sec-caja" class="tb-sec">
+          <h2 class="tb-h">Caja y bodega <span>Entradas, salidas, compromisos y café por vender</span></h2>
+          <div class="tb-grid">
+            <div class="card tb-span2"><div class="title">Entradas y salidas <span class="sub">por semana, con el saldo acumulado</span></div><div class="mapa-legend tb-leg" id="tb-caja-leg"></div><div id="tb-caja"></div></div>
+            <div class="card"><div class="title">Compromisos de pago</div><div id="tb-compromisos"></div></div>
+          </div>
+          <div class="card" style="margin-bottom:16px;"><div class="title">Pergamino en bodega: ¿conviene vender?</div><div id="tb-venta" class="tb-cols"></div></div>
+        </div>
+        <div id="sec-proy" class="tb-sec">
+          <h2 class="tb-h">Proyección <span>Lo que falta por cosechar y lo que se necesita para hacerlo</span></h2>
+          <div class="card" style="margin-bottom:16px;"><div class="title">Avance de la cosecha frente a lo proyectado</div><div id="tb-proy"></div></div>
+        </div>
+        <div id="sec-oper" class="tb-sec">
+          <h2 class="tb-h">Operación <span>Cumplimiento del plan y gasto en labores</span></h2>
+          <div class="tb-grid tb-2">
+            <div class="card"><div class="title">Órdenes de trabajo del periodo</div><div id="tb-ot"></div></div>
+            <div class="card"><div class="title">Gasto en labores por tipo</div><div id="tb-labores"></div></div>
+          </div>
+        </div>
+        <div id="sec-datos" class="tb-sec">
+          <h2 class="tb-h">Calidad de los datos <span>Qué tan confiables son las cifras de este tablero</span></h2>
+          <div class="card" style="margin-bottom:16px;"><div id="tb-datos"></div></div>
+          <p class="hint" id="tb-metas-res"></p>
+        </div>
+      </section>

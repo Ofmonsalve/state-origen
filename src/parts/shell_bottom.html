@@ -1,0 +1,19 @@
+    </main>
+  </div>
+</div>
+
+<nav class="tabbar" aria-label="Navegación">
+  <button data-nav="hoy" onclick="ir('hoy')"><svg><use href="#i-hoy"/></svg>Hoy</button>
+  <button data-nav="panel" onclick="ir('panel')"><svg><use href="#i-cosecha"/></svg>Cosecha</button>
+  <button class="fab-tab" onclick="abrirRegistrar()" aria-label="Registrar"><svg><use href="#i-plus"/></svg></button>
+  <button data-nav="planeacion" onclick="ir('planeacion')"><svg><use href="#i-plan"/></svg>Plan</button>
+  <button data-nav="mas" onclick="abrirMas()"><svg><use href="#i-mas"/></svg>Más</button>
+</nav>
+
+<div class="cmd-overlay" id="cmd-overlay" onclick="if(event.target===this)cerrarComandos()">
+  <div class="cmd-box" role="dialog" aria-modal="true" aria-label="Buscar o ejecutar">
+    <div class="cmd-input"><svg viewBox="0 0 24 24"><use href="#i-buscar"/></svg><input id="cmd-q" placeholder="Busca una orden, un lote, una persona o una acción" autocomplete="off" aria-label="Buscar"></div>
+    <div class="cmd-list" id="cmd-list" role="listbox"></div>
+    <div class="cmd-foot"><span><kbd>↑</kbd> <kbd>↓</kbd> moverse</span><span><kbd>Enter</kbd> abrir</span><span><kbd>Esc</kbd> cerrar</span></div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+/* ===== v25: predio y cumplimiento ===== */
+.lg-form .lg-ancho { grid-column:1 / -1; } .lg-form textarea { width:100%; } .lg-ay { display:block; font-size:11px; color:var(--text-faint); font-weight:500; margin-top:3px; }
+.lg-bool { flex-direction:row !important; align-items:center; gap:8px; } .lg-prev { margin-top:12px; }
+.lg-tabs { width:100%; }
+.rm25-g { display:grid; grid-template-columns:20px 1fr; grid-template-rows:auto auto; gap:6px; align-items:center; }
+.rm25-y { writing-mode:vertical-rl; transform:rotate(180deg); font-size:11px; color:var(--text-faint); font-weight:600; text-align:center; }
+.rm25-m { display:grid; grid-template-columns:18px repeat(5, minmax(0,1fr)); gap:4px; }
+.rm25-x { grid-column:2; text-align:center; font-size:11px; color:var(--text-faint); font-weight:600; }
+.rm25-l { display:grid; place-items:center; font-size:11px; color:var(--text-faint); font-weight:600; }
+.rm25 { aspect-ratio:1.6; border-radius:8px; display:grid; place-items:center; background:var(--good-soft); }
+.rm25.top { background:var(--info-soft); } .rm25.medio { background:var(--warn-soft); } .rm25.mal { background:var(--danger-soft); }
+.rm25 b { display:grid; place-items:center; width:26px; height:26px; border-radius:50%; background:var(--text); color:var(--surface); font-size:12px; }

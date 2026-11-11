@@ -1,0 +1,23 @@
+      <!-- ======================= VISTA: TABLERO ======================= -->
+      <section class="view" id="view-tablero">
+        <div class="tb-head">
+          <div class="capas" id="tb-periodos" role="tablist" aria-label="Periodo"></div>
+          <div class="chip-row" style="margin:0;"><select id="tb-finca" onchange="tbSt.finca=this.value;renderTablero()" aria-label="Finca"></select></div>
+          <span class="tb-rango" id="tb-rango"></span>
+        </div>
+        <div class="tb-lectura card"><div class="tb-eyebrow">Lectura del periodo</div><p id="tb-lectura"></p></div>
+        <div class="kpis" id="tb-kpis"></div>
+        <div class="tb-grid">
+          <div class="card tb-span2"><div class="title">Cereza recolectada <span class="sub">por lote, con el promedio del periodo</span></div><div class="mapa-legend tb-leg" id="tb-cosecha-leg"></div><div id="tb-cosecha"></div></div>
+          <div class="card"><div class="title">En qué se va el dinero</div><div id="tb-costos"></div></div>
+        </div>
+        <div class="tb-grid">
+          <div class="card tb-span2"><div class="title">Desempeño por lote <span class="sub">Sanidad del último muestreo</span></div><div class="tscroll"><table class="dtable" id="tb-lotes"></table></div></div>
+          <div class="card"><div class="title">Productividad de recolectores</div><div id="tb-rec"></div></div>
+        </div>
+        <div class="tb-grid tb-3">
+          <div class="card"><div class="title">Órdenes de trabajo del periodo</div><div id="tb-ot"></div></div>
+          <div class="card"><div class="title">Pergamino en bodega</div><div id="tb-inv"></div></div>
+          <div class="card"><div class="title">Próximas cosechas</div><div id="tb-prox"></div></div>
+        </div>
+      </section>

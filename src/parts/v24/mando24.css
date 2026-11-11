@@ -1,0 +1,21 @@
+/* ===== v24: centro de mando ===== */
+.md24-hero { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); gap:16px; margin-bottom:16px; }
+.md24-g { display:flex; gap:20px; align-items:center; background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); padding:20px 22px; box-shadow:var(--shadow-1); }
+.md24-g b { display:block; font:800 22px/1.2 var(--f-display); margin:4px 0 6px; } .md24-g small { color:var(--text-soft); font-size:12.5px; line-height:1.45; display:block; }
+.md24-k { font-size:11px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--text-faint); }
+.md24-fin { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:var(--r-lg); overflow:hidden; }
+.md24-fin > div { background:var(--surface); padding:11px 14px; } .md24-fin span { display:block; font-size:11.5px; color:var(--text-faint); } .md24-fin b { font:700 17px var(--f-display); }
+.md24-fin > div:last-child { grid-column:1 / -1; }
+.md24-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(250px,1fr)); gap:12px; margin-bottom:16px; }
+.md24-i { display:flex; gap:12px; align-items:center; text-align:left; background:var(--surface); border:1px solid var(--border); border-left:4px solid var(--border); border-radius:14px; padding:12px 14px; cursor:pointer; font:inherit; color:inherit; transition:box-shadow .15s, transform .15s; }
+.md24-i:hover { box-shadow:var(--shadow-2); transform:translateY(-1px); } .md24-i.bien { border-left-color:var(--good); } .md24-i.medio { border-left-color:var(--warn); } .md24-i.mal { border-left-color:var(--danger); }
+.md24-i b { display:block; font-size:14px; } .md24-i small { display:block; font-size:11.5px; color:var(--text-soft); line-height:1.35; margin-top:3px; }
+.an24 { flex:none; }
+.chip-btn.on { background:var(--text); color:var(--surface); border-color:var(--text); } .chip-btn.on small { color:inherit; opacity:.7; }
+.md24-al { display:grid; gap:6px; }
+.md24-a { display:grid; grid-template-columns:10px 1fr auto; gap:12px; align-items:center; padding:9px 12px; border:1px solid var(--border); border-radius:12px; background:var(--surface); font-size:13px; }
+.md24-a i { width:10px; height:10px; border-radius:50%; background:var(--info); } .md24-a.mal i { background:var(--danger); } .md24-a.medio i { background:var(--warn); }
+.md24-a.mal { border-color:color-mix(in srgb, var(--danger) 35%, var(--border)); background:color-mix(in srgb, var(--danger-soft) 45%, var(--surface)); }
+.md24-a small { display:block; font-size:10.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--text-faint); }
+@media (max-width:900px) { .md24-hero { grid-template-columns:1fr; } .md24-g { flex-direction:column; text-align:center; } }
+.md24-ch .chip-btn { padding:5px 12px; font-size:12.5px; min-height:0; }

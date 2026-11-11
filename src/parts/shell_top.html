@@ -1,0 +1,72 @@
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-hoy" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></symbol>
+  <symbol id="i-cosecha" viewBox="0 0 24 24"><circle cx="8.5" cy="15" r="4"/><circle cx="16" cy="16.5" r="3.4"/><path d="M8.5 11c0-3 1.8-5.6 4.6-7"/><path d="M13.1 4c2.4-.4 4.4.5 5.4 2.2-2.3.9-4.3.5-5.4-2.2Z"/><path d="M16 13.1c-.2-1.8-1-3.4-2.3-4.6"/></symbol>
+  <symbol id="i-plan" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1"/><path d="m8.5 11 2 2 4-4"/><path d="M8.5 17h7"/></symbol>
+  <symbol id="i-oper" viewBox="0 0 24 24"><path d="M3 20h18"/><path d="M5 20V10l5 3V10l5 3V6h4v14"/><path d="M8 16h1M13 16h1"/></symbol>
+  <symbol id="i-personal" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19.5c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><circle cx="17" cy="9.5" r="2.5"/><path d="M15.8 14.6c2.2.1 3.9 1.6 4.4 4.4"/></symbol>
+  <symbol id="i-finanzas" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10h18"/><path d="M15.5 14.5h2.5"/><path d="M6 6l9-3 1.4 3"/></symbol>
+  <symbol id="i-analisis" viewBox="0 0 24 24"><path d="M4 20V4"/><path d="M4 20h16"/><path d="m7 15 4-4 3 3 5-6"/><circle cx="19" cy="8" r="1"/></symbol>
+  <symbol id="i-finca" viewBox="0 0 24 24"><path d="M3 18c3-1.5 5.5-1.5 9 0s6 1.5 9 0"/><path d="M3 13.5c3-1.5 5.5-1.5 9 0s6 1.5 9 0"/><path d="M3 9c3-1.5 5.5-1.5 9 0s6 1.5 9 0"/></symbol>
+  <symbol id="i-buscar" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></symbol>
+  <symbol id="i-tema" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5v17a8.5 8.5 0 0 0 0-17Z" style="fill:currentColor"/></symbol>
+  <symbol id="i-mas" viewBox="0 0 24 24"><circle cx="6" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="18" cy="12" r="1.4"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-labor" viewBox="0 0 24 24"><path d="M12 21v-8"/><path d="M12 13c0-4 2.6-6.6 7-7-.2 4.4-3 7-7 7Z"/><path d="M12 15c0-3-2-5-5.5-5.3.1 3.3 2.2 5.3 5.5 5.3Z"/></symbol>
+  <symbol id="i-pdf" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5"/><path d="M12 11v6M9.5 14.5 12 17l2.5-2.5"/></symbol>
+  <symbol id="i-orden" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></symbol>
+  <symbol id="i-ir" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+</svg>
+
+<div class="shell">
+  <aside class="sidebar" aria-label="Navegación principal">
+    <div class="brand">
+      <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="10" style="fill:var(--accent)"/><path d="M17 7c-5.2 0-8.5 4.4-8.5 9.6 0 5.6 3.8 10.1 8.5 10.4 4.7-.3 8.5-4.8 8.5-10.4C25.5 11.4 22.2 7 17 7Z" style="fill:none;stroke:var(--accent-ink)" stroke-width="1.8"/><path d="M17 9.5c-1.6 2.6-1.6 5.2 0 7.7s1.6 5.2 0 7.7" style="fill:none;stroke:var(--accent-ink)" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <div><b>State Origen</b><small id="brand-finca">Gestión de finca cafetera</small></div>
+    </div>
+    <button class="nav-item" data-nav="hoy" onclick="ir('hoy')"><svg><use href="#i-hoy"/></svg>Hoy<span class="badge" id="badge-hoy" hidden></span></button>
+    <div class="nav-group">Producción</div>
+    <button class="nav-item" data-nav="panel" onclick="ir('panel')"><svg><use href="#i-cosecha"/></svg>Cosecha</button>
+    <button class="nav-item" data-nav="planeacion" onclick="ir('planeacion')"><svg><use href="#i-plan"/></svg>Planeación<span class="badge soft" id="badge-plan" hidden></span></button>
+    <button class="nav-item" data-nav="operacion" onclick="ir('operacion')"><svg><use href="#i-oper"/></svg>Operación</button>
+    <div class="nav-group">Personas y dinero</div>
+    <button class="nav-item" data-nav="personal" onclick="ir('personal')"><svg><use href="#i-personal"/></svg>Personal</button>
+    <button class="nav-item" data-nav="finanzas" onclick="ir('finanzas')"><svg><use href="#i-finanzas"/></svg>Finanzas</button>
+    <button class="nav-item" data-nav="analisis" onclick="ir('analisis')"><svg><use href="#i-analisis"/></svg>Análisis</button>
+    <div class="nav-group">Configuración</div>
+    <button class="nav-item" data-nav="gestion" onclick="ir('gestion')"><svg><use href="#i-finca"/></svg>Finca y lotes</button>
+    <div class="side-foot">
+      <button class="btn primary block" onclick="abrirRegistrar()"><svg width="16" height="16" style="stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round"><use href="#i-plus"/></svg>Registrar</button>
+      <button class="link" onclick="toggleDebug()" style="font-size:12px;color:var(--text-faint);font-weight:600;">Diagnóstico del sistema</button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar" id="topbar">
+      <div class="page-head"><h1 id="page-title">Hoy</h1><p id="page-sub">Lo que pasa hoy en la finca</p></div>
+      <div class="top-actions">
+        <span class="sync" id="sync-pill" title="Estado de guardado"><span class="dot"></span><span class="txt" id="sync-label">Conectando…</span></span>
+        <button class="search-btn" onclick="abrirComandos()" aria-label="Buscar o ejecutar una acción"><svg><use href="#i-buscar"/></svg><span class="lbl">Buscar o ejecutar…</span><kbd>Ctrl K</kbd></button>
+        <button class="icon-btn" id="tema-btn" onclick="cambiarTema()" aria-label="Cambiar entre tema claro y oscuro"><svg><use href="#i-tema"/></svg></button>
+      </div>
+    </header>
+
+    <main class="content" id="content">
+      <!-- ======================= VISTA: HOY ======================= -->
+      <section class="view active" id="view-hoy">
+        <div class="today-hero">
+          <div><div class="greet" id="hoy-saludo">Buen día</div><div class="date" id="hoy-fecha"></div></div>
+          <div class="week-actions"><button class="btn ghost small" onclick="ir('planeacion')">Ver plan semanal</button></div>
+        </div>
+        <div class="quick">
+          <button onclick="openWizard()"><span class="qi"><svg><use href="#i-cosecha"/></svg></span><b>Registrar cosecha</b><small>Kilos y horas por recolector, pasada y lote</small></button>
+          <button onclick="abrirNuevaOT()"><span class="qi"><svg><use href="#i-orden"/></svg></span><b>Nueva orden de trabajo</b><small>Labor, lote, insumos, herramientas y presupuesto</small></button>
+          <button onclick="irLabores()"><span class="qi"><svg><use href="#i-labor"/></svg></span><b>Registrar labor</b><small>Gasto suelto de una labor sin orden</small></button>
+          <button onclick="exportarPlanSemanalPDF()"><span class="qi"><svg><use href="#i-pdf"/></svg></span><b>Plan semanal en PDF</b><small>Para el jefe de campo y la administración</small></button>
+        </div>
+        <div id="hoy-setup"></div>
+        <div class="grid g2">
+          <div class="card"><div class="title">Para hoy <span class="sub" id="hoy-tareas-sub"></span></div><div id="hoy-tareas"><div class="skel" style="height:52px;margin-bottom:8px;"></div><div class="skel" style="height:52px;"></div></div></div>
+          <div class="card"><div class="title">Requiere atención</div><div id="hoy-alertas"><div class="skel" style="height:22px;margin-bottom:10px;"></div><div class="skel" style="height:22px;margin-bottom:10px;"></div><div class="skel" style="height:22px;"></div></div></div>
+        </div>
+        <div class="stat-cards" id="hoy-kpis"><div class="skel" style="height:88px;"></div><div class="skel" style="height:88px;"></div><div class="skel" style="height:88px;"></div><div class="skel" style="height:88px;"></div></div>
+      </section>

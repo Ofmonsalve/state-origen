@@ -1,0 +1,42 @@
+/* ---------- Mapa y muestreos ---------- */
+.mp-actions { display:flex; gap:8px; flex-wrap:wrap; margin-left:auto; }
+.mapa-layout { display:grid; grid-template-columns:minmax(0,1fr) 330px; gap:16px; align-items:start; }
+.mapa-side { display:flex; flex-direction:column; gap:16px; min-width:0; }
+.mapa-card { padding:0; overflow:hidden; }
+.mapa-toolbar { display:flex; gap:10px; flex-wrap:wrap; align-items:center; padding:10px 12px; border-bottom:1px solid var(--border); }
+.capas { display:flex; gap:3px; background:var(--surface-2); padding:3px; border-radius:11px; overflow-x:auto; max-width:100%; scrollbar-width:none; }
+.capas::-webkit-scrollbar { display:none; }
+.capas button { border:0; background:none; padding:6px 11px; border-radius:8px; font-size:12.5px; font-weight:650; color:var(--text-soft); white-space:nowrap; cursor:pointer; }
+.capas button.on { background:var(--surface); color:var(--text); box-shadow:var(--shadow-1); }
+.mp-plan-chip { font-size:12px; font-weight:650; color:var(--accent); background:var(--accent-soft); padding:5px 10px; border-radius:20px; display:inline-flex; gap:8px; align-items:center; }
+.mp-plan-chip button { border:0; background:none; color:inherit; cursor:pointer; font-size:13px; padding:0; }
+.mapa-wrap { position:relative; touch-action:none; user-select:none; -webkit-user-select:none; background:var(--surface-2); }
+#mapa-canvas { display:block; width:100%; cursor:grab; }
+#mapa-canvas.arrastrando { cursor:grabbing; }
+.mapa-zoom { position:absolute; right:12px; top:12px; display:flex; flex-direction:column; gap:6px; }
+.mapa-zoom .icon-btn { width:34px; height:34px; font-size:17px; font-weight:600; box-shadow:var(--shadow-1); }
+.mapa-tip { position:absolute; pointer-events:none; background:var(--text); color:var(--bg); font-size:12px; line-height:1.35; padding:7px 10px; border-radius:9px; white-space:nowrap; transform:translate(-50%, calc(-100% - 12px)); box-shadow:var(--shadow-2); z-index:2; }
+.mapa-tip b { font-family:var(--f-mono); font-weight:600; }
+.mapa-vacio { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; padding:24px; text-align:center; color:var(--text-soft); font-size:13.5px; }
+.mapa-vacio b { font-family:var(--f-display); font-size:18px; color:var(--text); }
+.mapa-legend { display:flex; gap:8px 16px; flex-wrap:wrap; padding:10px 14px; border-top:1px solid var(--border); font-size:12px; color:var(--text-soft); align-items:center; }
+.mapa-legend .lg { display:inline-flex; align-items:center; gap:6px; }
+.mapa-legend .lg i { width:10px; height:10px; border-radius:50%; display:inline-block; }
+.mapa-legend .lg i.ring { background:transparent !important; border:2px solid var(--accent); }
+.mapa-legend .nota { margin-left:auto; color:var(--text-faint); }
+.kv { display:flex; justify-content:space-between; align-items:baseline; gap:10px; padding:8px 0; border-top:1px solid var(--border); font-size:13px; }
+.kv:first-child { border-top:0; padding-top:0; }
+.kv > span { color:var(--text-faint); }
+.kv > b { font-family:var(--f-mono); font-weight:600; text-align:right; }
+.planta-code { font-family:var(--f-mono); font-size:20px; font-weight:600; letter-spacing:.01em; }
+.marca-btns { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+.marca-btns button.on { border-color:var(--accent); background:var(--accent-soft); color:var(--accent); }
+.res-row { display:grid; grid-template-columns:28px minmax(0,1.3fr) repeat(var(--nc,2), minmax(0,1fr)) 64px; gap:6px; align-items:center; padding:4px 0; border-top:1px solid var(--border); }
+.res-row.head { border-top:0; font-size:11px; color:var(--text-faint); font-weight:600; }
+.res-row input { padding:7px 9px; font-size:13px; }
+.res-row .cod { font-family:var(--f-mono); font-size:12px; overflow-wrap:anywhere; }
+.res-row .val { font-family:var(--f-mono); font-size:12.5px; text-align:right; }
+.res-row .idx { font-family:var(--f-mono); font-size:11px; color:var(--text-faint); }
+@media (max-width:1100px) { .mapa-layout { grid-template-columns:1fr; } .mapa-side { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (max-width:600px) { .mapa-side { grid-template-columns:1fr; } .mp-actions { margin-left:0; width:100%; } .mp-actions .btn { flex:1; }
+  .res-row { grid-template-columns:24px minmax(0,1fr) repeat(var(--nc,2), 64px) 48px; } }

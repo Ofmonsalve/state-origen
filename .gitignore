@@ -1,0 +1,4 @@
+node_modules/
+src/state-origen-v*.html
+!src/state-origen-v18.html
+src/state-origen-preview.html
