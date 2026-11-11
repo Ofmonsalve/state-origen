@@ -1,0 +1,19 @@
+/* ================= v34 · Relato y galería de historias ================= */
+.h34-rel { margin:18px 0 6px; padding:20px 22px; border-radius:18px; background:var(--surface-2, rgba(120,120,128,.08)); }
+.h34-rel-c { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+.h34-k { font:700 11px var(--f-body); letter-spacing:.14em; text-transform:uppercase; color:#b98a35; }
+.h34-rel p { margin:0 0 10px; font-size:15px; line-height:1.62; color:var(--text); max-width:70ch; }
+.h34-rel p b { font-weight:700; }
+.h34-rel p.h34-p1 { font-size:17px; line-height:1.55; }
+.h34-nota { font-size:12px; color:var(--text-faint); margin-top:4px; }
+.h34-g .title { margin-bottom:12px; }
+.h34-gr { display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:10px; }
+.h34-c { display:flex; flex-direction:column; align-items:flex-start; gap:3px; text-align:left; padding:14px 16px; border-radius:16px; border:0; cursor:pointer; color:#fff; background:linear-gradient(150deg, #2a211b, #14110f); font:inherit; transition:transform .15s ease; min-height:128px; }
+.h34-c:hover { transform:translateY(-2px); }
+.h34-c:focus-visible { outline:3px solid var(--accent, #1e8449); outline-offset:2px; }
+.h34-e { font:700 10px var(--f-body); letter-spacing:.12em; text-transform:uppercase; color:#d9b36a; }
+.h34-c b { font-size:15.5px; line-height:1.25; font-weight:700; }
+.h34-c i { font:500 11.5px var(--f-mono); font-style:normal; opacity:.72; }
+.h34-m { font-size:12px; opacity:.8; }
+.h34-v { margin-top:auto; font-size:12.5px; font-weight:600; color:#d9b36a; }
+@media (prefers-reduced-motion: reduce) { .h34-c { transition:none; } }

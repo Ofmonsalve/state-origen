@@ -43,7 +43,7 @@
         if (a.sec) { this.f('normal', 6.4, PDFC.tenue); this.texto(this.partir(a.sec, 60)[0], this.x1 - 3, this.y + 4.4, { align: 'right' }); } this.y += h + 2.2; }); }
     const max = Math.max(0, Math.floor((this.H - 24 - this.y - 14) / (this.o.horizontal ? 5 : 8.4)));
     if (S.length && max >= 2) { this.y += 3; this.subtitulo('Contenido', 'sección y página'); this.y += 1.5;
-      S.slice(0, max).forEach(s => { this.f('bold', 7.6, PDFC.marca); this.texto(String(s.n || '·').padStart(2, '0'), this.x0, this.y + 3); this.f('bold', 8.6, PDFC.tinta); this.texto(this.partir(s.titulo, this.cw - 30)[0], this.x0 + 8, this.y + 3);
+      S.slice(0, max).forEach(s => { this.f('bold', 7.6, PDFC.marca); this.texto(String(s.n || 0).padStart(2, '0'), this.x0, this.y + 3); this.f('bold', 8.6, PDFC.tinta); this.texto(this.partir(s.titulo, this.cw - 30)[0], this.x0 + 8, this.y + 3);
         this.f('bold', 8, PDFC.tinta2); this.texto(String(s.pag - 1), this.x1, this.y + 3, { align: 'right' });
         if (s.desc && !this.o.horizontal) { this.f('normal', 7.2, PDFC.tenue); this.texto(this.partir(s.desc, this.cw - 30)[0], this.x0 + 8, this.y + 6.6); this.y += 8.4; } else this.y += 5;
         this.draw(PDFC.linea, 0.15); d.line(this.x0 + 8, this.y - 0.6, this.x1, this.y - 0.6); }); }

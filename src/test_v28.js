@@ -9,7 +9,7 @@ const tick = (ms = 80) => new Promise(r => setTimeout(r, ms)); const desc = [];
     w.claude = { use: async k => k === 'downloads' ? { save: async f => desc.push(f) } : null }; w.addEventListener('error', e => errores.push(e.message)); w.HTMLCanvasElement.prototype.getContext = () => null; w.matchMedia = () => ({ matches: false, addEventListener() {}, removeEventListener() {} }); w.Element.prototype.scrollIntoView = function () {}; w.scrollTo = () => {}; } });
   await tick(1600); const w = dom.window, d = w.document, E = s => w.eval(s);
   const leer = f => new Promise(r => { const fr = new w.FileReader(); fr.onload = () => r(Buffer.from(fr.result)); fr.readAsArrayBuffer(f.data); });
-  ok(Number(E('APP_VERSION')) >= 28 && E('REPORTES.length') === 28, 'Centro de reportes con 28 descargables (6 nuevos)');
+  ok(Number(E('APP_VERSION')) >= 28 && E('REPORTES.length') === 29, 'Centro de reportes con 28 descargables (6 nuevos)');
   w.ir('reportes'); await tick(200); ok(/Excel/.test(d.querySelector('.rep-card[data-rep="excel"] .rep-go').textContent), 'La fila del Excel tiene su botón «Excel»');
   // Motor: columnas comparativas vacías, cifras en portada y glosario
   const motor = E(`(() => { const R = new InformePDF({ titulo: 'Prueba', imagen: false }); R.portada(); R.kpis([{ t: 'Ingresos', v: '$1 M' }, { t: 'Margen', v: '30 %' }]); R.seccion(1, 'Uno'); const y0 = R.y;

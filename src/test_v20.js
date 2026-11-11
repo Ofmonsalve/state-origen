@@ -25,7 +25,7 @@ const tick = (ms = 40) => new Promise(r => setTimeout(r, ms));
   ok(!!d.querySelector('.nav-item[data-nav="reportes"]') && !!d.querySelector('.nav-item[data-nav="lote"]'), 'Menú con Reportes y Ficha del lote');
   // Reportes
   w.ir('reportes'); await tick();
-  ok(d.querySelectorAll('.rep-card').length === 28 && d.getElementById('page-title').textContent === 'Reportes', 'Centro de reportes con 28 descargables');
+  ok(d.querySelectorAll('.rep-card').length === 29 && d.getElementById('page-title').textContent === 'Reportes', 'Centro de reportes con 28 descargables');
   E("repSt.cat='Finanzas';renderReportes()"); await tick(); ok(d.querySelectorAll('.rep-card').length === 7, 'Filtro por categoría (7 financieros)'); E("repSt.cat='Todos';renderReportes()"); await tick();
   for (const id of E("REPORTES.map(r => r.id)")) { const btn = d.querySelector('.rep-card[data-rep="' + id + '"] .rep-go'); const antes = descargas.length; btn.click(); await tick(120); ok(descargas.length === antes + 1 && descargas[descargas.length - 1].size > 3000, 'PDF ' + id + ' → ' + (descargas[descargas.length - 1] || {}).n); }
   ok(E("(() => { const R = new InformePDF({ titulo: 'x' }); return R.fam })()") === 'Figtree', 'Tipografía Figtree incrustada en los PDF');

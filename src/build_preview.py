@@ -1,5 +1,5 @@
 import json
-s=open('state-origen-v33.html',encoding='utf-8').read()
+s=open('state-origen-v34.html',encoding='utf-8').read()
 exec(open('demo26.py',encoding='utf-8').read()); _d=json.load(open('demo20.json',encoding='utf-8')); _d.update(demo26()); demo=json.dumps(_d, ensure_ascii=False)
 def rep(a,b):
     global s
