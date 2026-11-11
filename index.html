@@ -1536,6 +1536,27 @@ input.f31-moneda, input.f31-num { font-variant-numeric:tabular-nums; } input.f31
 .h34-v { margin-top:auto; font-size:12.5px; font-weight:600; color:#d9b36a; }
 @media (prefers-reduced-motion: reduce) { .h34-c { transition:none; } }
 
+/* ================= v35 · Ficha científica ================= */
+.c35 { margin-top:22px; }
+.c35-cab { display:flex; flex-direction:column; gap:2px; margin-bottom:12px; }
+.c35-k { font:700 11px var(--f-body); letter-spacing:.14em; text-transform:uppercase; color:#b98a35; }
+.c35-cab b { font-size:15px; }
+.c35-g { border-top:1px solid var(--border, rgba(120,120,128,.2)); padding:10px 0; }
+.c35-g summary { cursor:pointer; display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 12px; list-style:none; padding:4px 0; }
+.c35-g summary::-webkit-details-marker { display:none; }
+.c35-g summary::before { content:'›'; display:inline-block; width:14px; color:var(--text-faint); transition:transform .15s ease; font-weight:700; }
+.c35-g[open] summary::before { transform:rotate(90deg); }
+.c35-g summary b { font-size:14.5px; }
+.c35-g summary span { font-size:12px; color:var(--text-faint); }
+.c35-t { width:100%; border-collapse:collapse; margin-top:8px; font-size:13px; }
+.c35-t th { text-align:left; font:600 10.5px var(--f-body); letter-spacing:.06em; text-transform:uppercase; color:var(--text-faint); padding:6px 10px 6px 0; border-bottom:1px solid var(--text); white-space:nowrap; }
+.c35-t td { padding:7px 10px 7px 0; border-bottom:1px solid var(--border, rgba(120,120,128,.16)); vertical-align:top; color:var(--text-soft, var(--text)); }
+.c35-t td:first-child { color:var(--text); font-weight:500; }
+.c35-t td.c35-v { font-weight:700; color:var(--text); font-variant-numeric:tabular-nums; white-space:nowrap; }
+.c35-t .num { text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
+.c35-card .c35 { margin-top:0; }
+@media (prefers-reduced-motion: reduce) { .c35-g summary::before { transition:none; } }
+
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -2214,7 +2235,7 @@ function dlog(msg, tipo) {
   body.appendChild(line);
   body.scrollTop = body.scrollHeight;
 }
-const APP_VERSION = '34.0';
+const APP_VERSION = '35.0';
 let _ultimoError = '', _repeticiones = 0;
 function registrarError(prefijo, err, msg, linea) {
   const pila = err && err.stack ? String(err.stack).split('\n').slice(1, 4).map(l => l.trim().replace(/\(?https?:\/\/[^)]*:(\d+):(\d+)\)?/, 'línea $1')).join(' ← ') : '';
@@ -15446,6 +15467,7 @@ function pasaporte32(tipo, id) { if (!window.jspdf) { toast('No se pudo cargar e
   R.seccion(5, 'Beneficio, trilla, tueste y taza', B.metodos.join(' · ')); R.kv([['Proceso', B.metodos.join(', ') || '—', true], ['Fermentación', B.ferm.length ? gr32(media32(B.ferm), 0) + ' horas' : '—'], ['Secado', B.secado.join(', ') || '—'], ['Conversión cereza : pergamino', B.rel ? gr32(B.rel, 2) + ' : 1' : '—'], ['Pergamino seco', num(redondear(B.sal, 1)) + ' kg'], ['Humedad final', B.humedad ? gr32(B.humedad) + ' %' : '—'], ['Factor de rendimiento', B.factor ? gr32(B.factor) : '—'], O && O.tr ? ['Trilla', (O.tr.calidad || '') + ' · ' + num(redondear(O.tr.kgExcelso, 1)) + ' kg'] : null, O && O.t ? ['Tostión', ((infoTostion(O.t).perfil || {}).nombre || 'Perfil propio') + ' · merma ' + gr32(infoTostion(O.t).merma) + ' %'] : null, pt ? ['Empaque', fechaPDF(pt.fecha) + ' · ' + num(pt.unidades) + ' unidades'] : null].filter(Boolean), 2);
   if (cat) { R.barrasH(ATRIB_SCA.map(([k, t]) => ({ t, v: n0(cat[k]), vt: num(n0(cat[k])) })), { etiqueta: 40, valor: 14 }); if (cat.notas) R.nota(cat.notas, 'ok', 'Notas de cata'); }
   R.seccion(6, 'Línea de tiempo', H.diasTotal ? num(H.diasTotal) + ' días de historia' : ''); R.tabla({ cols: [{ t: 'Fecha', w: 0.9 }, { t: 'Hito', w: 1.5 }, { t: 'Detalle', w: 3 }, { t: 'Días', a: 'right', w: 0.6 }], fs: 7.8, filas: H.eventos.map(e => [fechaPDF(e.f), e.t, e.d || '', e.dias ? '+' + num(e.dias) : '']) });
+  try { cienciaPDF35(R, H, 7); } catch (e) { if (typeof dlog === 'function') dlog('✗ ficha científica PDF: ' + e.message, 'err'); }
   R.asegurar(40); qrPDF32(R.doc, ['STATE ORIGEN', sinTildes32(f.nombre || ''), H.codigo, cat ? 'SCA ' + gr32(puntajeSCA(cat), 2) : '', H.ini ? 'Cosecha ' + H.ini : ''].filter(Boolean).join(' | '), R.x0, R.y + 2, 30); R.f('bold', 9, PDFC.tinta); R.texto('Código del lote ' + H.codigo, R.x0 + 36, R.y + 10); R.f('normal', 7.6, PDFC.tenue); R.texto('Datos tomados del registro de la finca en State Origen.', R.x0 + 36, R.y + 15); R.y += 36;
   R.guardar(nombreArchivo('pasaporte-cafe-' + H.codigo)); }
 
@@ -15718,7 +15740,7 @@ function cienciaPDF34(R, H, n) { const C = H.clima, S = H.suelo;
     R.tabla({ cols: [{ t: 'Fecha', w: 0.9 }, { t: 'Hito', w: 1.5 }, { t: 'Detalle', w: 3 }, { t: 'Días', a: 'right', w: 0.6 }], fs: 7.8, comparar: false, filas: H.eventos.map(e => [fechaPDF(e.f), { t: e.t, b: true }, e.d || '', e.dias ? '+' + num(e.dias) : '']) }); }
   return n; }
 /* Dentro del certificado de trazabilidad: la historia completa del lote comercial vendido */
-function historiaEnCertificado34(R, o) { const pid = ((o.partes || [])[0] || {}).partida; if (!pid || !pid.id) return; const H = datosHistoria32('partida', pid.id); if (!H) return; relatoPDF34(R, H); cienciaPDF34(R, H, 4); }
+function historiaEnCertificado34(R, o) { const pid = ((o.partes || [])[0] || {}).partida; if (!pid || !pid.id) return; const H = datosHistoria32('partida', pid.id); if (!H) return; relatoPDF34(R, H); let n = cienciaPDF35(R, H, 4); if (H.eventos && H.eventos.length) { R.seccion(n++, 'Línea de tiempo', H.diasTotal ? num(H.diasTotal) + ' días de historia, de la siembra al último paso registrado.' : ''); R.tabla({ cols: [{ t: 'Fecha', w: 0.9 }, { t: 'Hito', w: 1.5 }, { t: 'Detalle', w: 3 }, { t: 'Días', a: 'right', w: 0.6 }], fs: 7.8, comparar: false, filas: H.eventos.map(e => [fechaPDF(e.f), { t: e.t, b: true }, e.d || '', e.dias ? '+' + num(e.dias) : '']) }); } }
 
 /* La ficha antigua de trazabilidad se reemplaza por los documentos nuevos */
 if (typeof fichaTrazaPDF === 'function') { const _ficha34 = fichaTrazaPDF; fichaTrazaPDF = function () { try { if (coSt.trazaVenta && ventas.find(v => v.id === coSt.trazaVenta)) return repTraza({ venta: coSt.trazaVenta }); if (coSt.trazaPartida && partidas.find(p => p.id === coSt.trazaPartida)) return pasaporte32('partida', coSt.trazaPartida); } catch (e) {} return _ficha34.apply(this, arguments); }; }
@@ -15736,6 +15758,87 @@ const _renderTaza34 = renderTaza; renderTaza = function () { _renderTaza34.apply
 /* En Reportes: el pasaporte del café más reciente */
 function repHistoria34() { const L = historias34(); if (!L.length) { toast('Aún no hay lotes comerciales ni producto empacado para contar su historia.', 'err'); return; } pasaporte32(L[0].tipo, L[0].id); }
 if (typeof REPORTES !== 'undefined') REPORTES.push({ id: 'historia', cat: 'Comercial', t: 'La historia del café (pasaporte)', d: 'El relato del café más reciente y los datos que lo respaldan: origen, suelo, floración, clima del grano con máximas y mínimas, cosecha, beneficio, taza y línea de tiempo. Las demás historias están en Ventas y trazabilidad.', fn: repHistoria34, ic: 'i-venta', pag: '6–7' });
+
+/* ================= v35 · Ficha científica del lote: la trazabilidad con precisión de ciencia de datos (clima por etapa del fruto, percentiles, suelo con relaciones entre bases, rendimiento por planta, dispersión de la recolección, balance de masa del beneficio a la taza y calidad del dato) ================= */
+function pct35(a, p) { if (!a.length) return null; const s = a.slice().sort((x, y) => x - y); const i = (s.length - 1) * p; const lo = Math.floor(i), hi = Math.ceil(i); return s[lo] + (s[hi] - s[lo]) * (i - lo); }
+const ETAPAS35 = [['Cuajado y crecimiento inicial', 0, 49], ['Expansión rápida del fruto', 50, 119], ['Llenado y endurecimiento del grano', 120, 175], ['Maduración', 176, 9999]];
+const g35 = (v, d, u) => v == null || isNaN(v) ? '—' : gr32(v, d == null ? 1 : d) + (u ? ' ' + u : '');
+/* Devuelve grupos { t, sub, cols, filas } con cada cifra, su unidad y cómo se obtuvo */
+function ciencia35(H) { const G = []; if (!H) return G; const { f, T, O, pt, pa } = H, C = H.clima, cu = H.cultivo || {}, S = H.suelo, B = H.beneficio || {}, cat = O && O.cat; const add = (t, sub, cols, filas) => { filas = filas.filter(Boolean); if (filas.length) G.push({ t, sub, cols, filas }); };
+  // 1. Georreferencia y sistema productivo
+  add('Georreferencia y sistema productivo', 'Ubicación, relieve y arreglo de siembra del lote de origen', ['Variable', 'Valor', 'Precisión o método'], [
+    f.geoRef && isFinite(f.geoRef.lat) ? ['Latitud · longitud', Number(f.geoRef.lat).toFixed(5).replace('.', ',') + '° · ' + Number(f.geoRef.lon).toFixed(5).replace('.', ',') + '°', 'WGS 84, cinco decimales (≈ 1 m)'] : null,
+    cu.alt ? ['Altitud media del lote', num(Math.round(cu.alt)) + ' m s. n. m.', cu.altMin != null && cu.altMax !== cu.altMin ? 'entre ' + num(Math.round(cu.altMin)) + ' y ' + num(Math.round(cu.altMax)) + ' m · desnivel ' + num(Math.round(cu.altMax - cu.altMin)) + ' m' : 'dato del lote'] : null,
+    cu.ha ? ['Área en café', gr32(cu.ha, 2) + ' ha', 'polígono del lote'] : null,
+    cu.ds ? ['Arreglo de siembra', num(cu.ds) + ' × ' + num(cu.dp) + ' m', num(Math.round(10000 / (cu.ds * cu.dp))) + ' plantas por hectárea teóricas'] : null,
+    cu.sitios ? ['Plantas en el lote', num(cu.sitios), cu.vivas != null && cu.vivas !== cu.sitios ? num(cu.vivas) + ' en producción (' + gr32(cu.vivas / cu.sitios * 100, 1) + ' %)' : 'censo del trazo'] : null,
+    (cu.variedades || []).length ? ['Material genético', cu.variedades.join(', '), 'Coffea arabica'] : null,
+    cu.siembra ? ['Edad del cultivo en la cosecha', gr32(cu.edad, 1) + ' años', 'sembrado el ' + fechaPDF(cu.siembra)] : null]);
+  // 2. Clima por etapa de desarrollo del fruto
+  if (H.flor && H.ini) { const filas = []; ETAPAS35.forEach(([n, a, b]) => { const d1 = sumarDias(H.flor.fecha, a); if (d1 > H.fin) return; let d2 = sumarDias(H.flor.fecha, b); if (d2 > H.fin) d2 = H.fin; const c = climaVentana32(f.id, d1, d2); if (!c) return;
+      filas.push([n, 'día ' + a + ' a ' + dif32(H.flor.fecha, d2), g35(c.tmed, 1, '°C'), c.tmaxAbs ? g35(n0(c.tmaxAbs.tmax), 1) + ' / ' + (c.tminAbs ? g35(n0(c.tminAbs.tmin), 1) : '—') : '—', num(Math.round(c.lluvia)) + ' mm', num(c.diasLluvia), num(Math.round(c.gdd)), g35(c.hrMed, 0, '%')]); });
+    add('Clima por etapa de desarrollo del fruto', 'Días después de la floración' + (H.flor.estimada ? ' (floración estimada)' : '') + ' · etapas de referencia general para café arábica', ['Etapa', 'Periodo', 'T media', 'Máx / mín abs. (°C)', 'Lluvia', 'Días con lluvia', 'Grados-día', 'HR media'], filas); }
+  // 3. Distribución estadística del clima
+  if (C) { const R = clima.filter(c => (!c.fincaId || !f.id || c.fincaId === f.id) && c.fecha >= C.desde && c.fecha <= C.hasta); const tx = R.filter(c => c.tmax != null && c.tmax !== '').map(c => n0(c.tmax)), tn = R.filter(c => c.tmin != null && c.tmin !== '').map(c => n0(c.tmin)); const tm = R.filter(c => c.tmax != null && c.tmax !== '' && c.tmin != null && c.tmin !== '').map(c => (n0(c.tmax) + n0(c.tmin)) / 2); const ll = R.filter(c => n0(c.lluvia) >= 1).map(c => n0(c.lluvia)); const opt = tm.filter(t => t >= 18 && t <= 22).length;
+    const fila = (t, a, u, d) => a.length ? [t, g35(media32(a), d, u), g35(desv32(a), d, u), g35(pct35(a, 0.1), d), g35(pct35(a, 0.5), d), g35(pct35(a, 0.9), d), g35(Math.min(...a), d) + ' – ' + g35(Math.max(...a), d), num(a.length)] : null;
+    add('Distribución estadística del clima del grano', 'Del ' + fechaPDF(C.desde) + ' al ' + fechaPDF(C.hasta) + ' · cobertura de medición ' + g35(Math.min(100, C.cobertura), 0, '%') + ' de los días', ['Variable', 'Media', 'Desv. estándar', 'P10', 'Mediana', 'P90', 'Mín – máx', 'n'], [fila('Temperatura máxima diaria (°C)', tx, '', 1), fila('Temperatura mínima diaria (°C)', tn, '', 1), fila('Temperatura media diaria (°C)', tm, '', 1), fila('Lluvia en día lluvioso (mm)', ll, '', 1)]);
+    add('Índices climáticos', 'Indicadores derivados de los registros diarios', ['Índice', 'Valor', 'Cómo se calcula'], [
+      tm.length ? ['Días en el intervalo térmico óptimo', num(opt) + ' de ' + num(tm.length) + ' (' + g35(opt / tm.length * 100, 0) + ' %)', 'temperatura media diaria entre 18 y 22 °C'] : null,
+      ['Tiempo térmico acumulado', num(Math.round(C.gdd)) + ' grados-día', 'suma diaria de (T media − 10 °C)'],
+      C.amplitud != null ? ['Amplitud térmica diaria', g35(C.amplitud, 1, '°C') + ' en promedio', 'máxima − mínima del día · mayor valor ' + g35(C.amplitudMax, 1, '°C')] : null,
+      ['Precipitación acumulada', num(Math.round(C.lluvia)) + ' mm', num(C.diasLluvia) + ' días con ≥ 1 mm · ' + g35(C.diasLluvia ? C.lluvia / C.diasLluvia : null, 1, 'mm') + ' por día lluvioso'],
+      ['Frecuencia de lluvia', g35(C.diasLluvia / Math.max(1, C.n) * 100, 0, '%') + ' de los días', 'días con ≥ 1 mm sobre días medidos'],
+      ['Periodo seco más largo', num(C.rachaSeca) + ' días consecutivos', C.rachaFin ? 'terminó el ' + fechaPDF(C.rachaFin) : 'días con < 1 mm'],
+      ['Días de calor y de frío', num(C.diasCalor) + ' sobre 30 °C · ' + num(C.diasFrio) + ' bajo 13 °C', 'umbrales de estrés térmico de referencia'],
+      C.hrMed != null ? ['Humedad relativa', g35(C.hrMed, 0, '%') + ' en promedio', C.hrMin && C.hrMax ? 'entre ' + g35(n0(C.hrMin.hr), 0) + ' y ' + g35(n0(C.hrMax.hr), 0) + ' %' : ''] : null]); }
+  // 4. Suelo
+  if (S) { const v = k => S[k] != null && S[k] !== '' ? n0(S[k]) : null; const Ca = v('Ca'), Mg = v('Mg'), K = v('K'), Al = v('Al'), CI = v('CICE'); 
+    add('Química del suelo', 'Análisis del ' + fechaPDF(S.fecha) + (S.laboratorio ? ' · ' + S.laboratorio : '') + (S.profundidad ? ' · ' + num(S.profundidad) + ' cm de profundidad' : ''), ['Parámetro', 'Valor', 'Intervalo adecuado', 'Interpretación'], [['Textura', S.textura || '—', '', '']].concat(REF_SUELO32.filter(r => v(r[0]) != null).map(r => [r[1], num(S[r[0]]) + (r[2] ? ' ' + r[2] : ''), num(r[3]) + ' – ' + num(r[4]), nivelSuelo32(r[0], S[r[0]]) || ''])));
+    add('Relaciones entre bases y acidez', 'Equilibrio de cationes del suelo, calculado del mismo análisis', ['Relación', 'Valor', 'Referencia', 'Interpretación'], relacionesSuelo(S).map(r => [r[0], g35(r[1], r[4] ? 1 : 2, r[4] || ''), String(r[3]).toLowerCase(), r[1] < r[2][0] ? 'bajo' : r[1] > r[2][1] ? 'alto' : 'adecuado']).concat(Ca != null && Mg != null && K != null && CI ? [['Saturación de bases', g35((Ca + Mg + K) / CI * 100, 1, '%'), 'Ca + Mg + K sobre la CICE', '']] : [])); }
+  // 5. Sanidad
+  if (H.L && H.L.sanidad && H.L.sanidad.length) add('Sanidad del cultivo antes de la cosecha', 'Último muestreo de cada variable', ['Variable', 'Nivel', 'Fecha del muestreo'], H.L.sanidad.map(x => [x.t, g35(x.prom, 1, '%'), x.fecha ? fechaPDF(x.fecha) : '']).concat(H.L.carencia != null ? [['Periodo de carencia', num(H.L.carencia) + ' días', 'entre la última aplicación fitosanitaria y la cosecha']] : []));
+  // 6. Cosecha
+  if (T && T.kgCereza) { const porJ = new Map(); H.bs.forEach(b => registrosDeBeneficio(b).forEach(r => { const k = r.trabajadorId + '|' + r.fecha; porJ.set(k, (porJ.get(k) || 0) + n0(r.kg)); })); const J = [...porJ.values()]; const md = media32(J), ds = desv32(J); const pico = H.cosechaDias.reduce((m, d) => (!m || d.kg > m.kg ? d : m), null);
+    add('Cosecha: rendimiento y dispersión', H.ini ? 'Del ' + fechaPDF(H.ini) + ' al ' + fechaPDF(H.fin) + ' · ' + num(H.cosechaDias.length) + ' días de recolección' : '', ['Indicador', 'Valor', 'Cómo se calcula'], [
+      ['Cereza recolectada', num(redondear(T.kgCereza, 1)) + ' kg', num(J.length) + ' jornadas-persona pesadas'],
+      cu.vivas || cu.sitios ? ['Cereza por planta', g35(T.kgCereza / (cu.vivas || cu.sitios) * 1000, 0, 'g'), 'kilos de este lote comercial sobre plantas en producción'] : null,
+      cu.ha ? ['Cereza por hectárea', num(Math.round(T.kgCereza / cu.ha)) + ' kg/ha', 'solo la cosecha de este lote comercial'] : null,
+      J.length ? ['Recolección por jornada', g35(md, 1, 'kg') + ' ± ' + g35(ds, 1, 'kg'), 'media ± desviación estándar · mediana ' + g35(pct35(J, 0.5), 1, 'kg')] : null,
+      J.length > 1 && md ? ['Coeficiente de variación entre jornadas', g35(ds / md * 100, 0, '%'), 'desviación estándar sobre la media · mín ' + g35(Math.min(...J), 1) + ' · máx ' + g35(Math.max(...J), 1) + ' kg'] : null,
+      pico ? ['Día de mayor recolección', num(Math.round(pico.kg)) + ' kg', fechaPDF(pico.d) + ' · ' + g35(pico.kg / T.kgCereza * 100, 0, '%') + ' del total'] : null,
+      H.diasFlor != null ? ['Días de flor a cosecha', num(H.diasFlor), H.flor.estimada ? 'floración estimada' : 'floración registrada el ' + fechaPDF(H.flor.fecha)] : null]); }
+  // 7. Balance de masa
+  { const tr = O && O.tr, to = O && O.t; const filas = [];
+    if (B.sal) { filas.push(['Cereza → pergamino seco', num(Math.round(B.ent)) + ' → ' + num(Math.round(B.sal)) + ' kg', g35(B.rel, 2) + ' kg de cereza por kg de pergamino · rendimiento ' + g35(B.sal / B.ent * 100, 1, '%')]);
+      if (B.ferm && B.ferm.length) filas.push(['Fermentación', g35(media32(B.ferm), 0, 'h') + (B.ferm.length > 1 ? ' ± ' + g35(desv32(B.ferm), 1, 'h') : ''), num(B.ferm.length) + ' bache(s)' + (B.ferm.length > 1 ? ' · entre ' + num(Math.min(...B.ferm)) + ' y ' + num(Math.max(...B.ferm)) + ' h' : '')]);
+      if (B.humedad) filas.push(['Humedad del pergamino', num(B.humedad) + ' %', 'intervalo de almacenamiento seguro: 10 a 12 %']); if (B.factor) filas.push(['Factor de rendimiento', num(B.factor), 'kg de pergamino para 70 kg de excelso · referencia 92,8']); }
+    if (tr && n0(tr.kgCPS)) filas.push(['Pergamino → excelso (trilla)', num(redondear(tr.kgCPS, 1)) + ' → ' + num(redondear(tr.kgExcelso, 1)) + ' kg', 'rendimiento ' + g35(n0(tr.kgExcelso) / n0(tr.kgCPS) * 100, 1, '%') + (n0(tr.kgPasilla) ? ' · pasilla ' + g35(n0(tr.kgPasilla) / n0(tr.kgCPS) * 100, 1, '%') : '')]);
+    if (to && n0(to.kgVerde)) filas.push(['Verde → tostado', num(redondear(to.kgVerde, 1)) + ' → ' + num(redondear(to.kgTostado, 1)) + ' kg', 'merma de tostión ' + g35((1 - n0(to.kgTostado) / n0(to.kgVerde)) * 100, 1, '%')]);
+    if (B.rel && tr && n0(tr.kgCPS) && n0(tr.kgExcelso) && to && n0(to.kgVerde) && n0(to.kgTostado)) { const x = B.rel * (n0(tr.kgCPS) / n0(tr.kgExcelso)) * (n0(to.kgVerde) / n0(to.kgTostado)); filas.push(['Cereza por kilo de café tostado', g35(x, 1, 'kg'), 'producto de las tres conversiones anteriores']); }
+    add('Balance de masa: de la cereza a la taza', 'Qué entra y qué sale en cada transformación', ['Transformación', 'Masa', 'Rendimiento'], filas); }
+  // 8. Perfil sensorial
+  if (cat) { const A = ATRIB_SCA.filter(([k]) => cat[k] != null && cat[k] !== ''); const vals = A.map(([k]) => n0(cat[k])); add('Perfil sensorial', 'Catación del ' + fechaPDF(cat.fecha) + (cat.catador ? ' · ' + cat.catador : '') + ' · protocolo SCA', ['Atributo', 'Puntaje', 'Posición'], A.map(([k, t]) => [t, g35(n0(cat[k]), 2), n0(cat[k]) === Math.max(...vals) ? 'el más alto' : n0(cat[k]) === Math.min(...vals) ? 'el más bajo' : '']).concat([['Puntaje total', g35(puntajeSCA(cat), 2) + ' puntos', puntajeSCA(cat) >= 80 ? 'café de especialidad (≥ 80)' : 'por debajo de 80']])); }
+  // 9. Calidad del dato
+  add('Calidad y origen del dato', 'Qué tan sólida es cada parte de esta ficha', ['Componente', 'Estado', 'Detalle'], [
+    ['Origen del café', H.bs.length ? 'Medido' : 'Sin baches ligados', num(H.bs.length) + ' bache(s) de beneficio · ' + num((H.cosechaDias || []).length) + ' días de pesadas'],
+    H.flor ? ['Floración', H.flor.estimada ? 'Estimada' : 'Registrada', H.flor.fuente] : null,
+    C ? ['Clima', C.cobertura >= 90 ? 'Completo' : C.cobertura >= 60 ? 'Parcial' : 'Escaso', num(C.n) + ' de ' + num(C.dias) + ' días con medición (' + g35(Math.min(100, C.cobertura), 0) + ' %)'] : ['Clima', 'Sin datos', 'no hay registros de clima en el periodo'],
+    ['Suelo', S ? 'Analizado' : 'Sin análisis', S ? 'muestra del ' + fechaPDF(S.fecha) + ' · ' + num(Math.max(0, Math.round(dif32(S.fecha, H.fin || hoyLocal()) / 30.4))) + ' meses antes del fin de la cosecha' : 'registre un análisis de suelo del lote'],
+    ['Taza', cat ? 'Catado' : pa && pa.taza ? 'Puntaje registrado' : 'Sin catación', cat ? 'protocolo SCA' : pa && pa.taza ? num(pa.taza) + ' puntos en el lote comercial, sin ficha de catación por atributos' : 'registre la catación del lote']]);
+  return G; }
+
+/* En pantalla: bloque plegable por grupo */
+function cienciaHTML35(H) { const G = ciencia35(H); if (!G.length) return ''; return `<div class="c35"><div class="c35-cab"><span class="c35-k">Ficha científica del lote</span><b>${num(G.reduce((s, g) => s + g.filas.length, 0))} variables medidas o calculadas, con su unidad y su método</b></div>${G.map((g, i) => `<details class="c35-g"${i < 3 ? ' open' : ''}><summary><b>${esc(g.t)}</b><span>${esc(g.sub || '')}</span></summary><div class="tscroll"><table class="c35-t"><thead><tr>${g.cols.map((c, j) => `<th${j && g.cols.length > 4 ? ' class="num"' : ''}>${esc(c)}</th>`).join('')}</tr></thead><tbody>${g.filas.map(r => `<tr>${r.map((c, j) => `<td${j && g.cols.length > 4 ? ' class="num"' : j === 1 ? ' class="c35-v"' : ''}>${esc(c == null ? '' : String(c))}</td>`).join('')}</tr>`).join('')}</tbody></table></div></details>`).join('')}</div>`; }
+/* En PDF */
+function cienciaPDF35(R, H, n) { const G = ciencia35(H); if (!G.length) return n; R.seccion(n++, 'Ficha científica del lote', 'Cada variable con su unidad y la forma en que se midió o calculó. Las referencias son generales para café arábica y deben confirmarse con el agrónomo.');
+  G.forEach(g => { const ancho = g.cols.length > 4; R.tabla({ titulo: g.t, der: R.partir(g.sub || '', R.cw * 0.62)[0], fs: ancho ? 7.2 : 7.9, comparar: false, cols: g.cols.map((c, j) => ({ t: c, w: j === 0 ? (ancho ? 2.2 : 1.7) : !ancho && j === g.cols.length - 1 ? 2.3 : 1, a: ancho && j ? 'right' : 'left' })), filas: g.filas.map(r => r.map((c, j) => j === 1 && !ancho ? { t: c, b: true } : c)) }); R.y += 2; }); return n; }
+
+/* La ventana de la historia: la ficha científica al final de los capítulos */
+const _historia35 = historia32; historia32 = function (tipo, id) { _historia35.apply(this, arguments); try { const box = document.getElementById('modal-box'); const h = box && box.querySelector('.h32'); if (!h || box.querySelector('.c35')) return; h.insertAdjacentHTML('beforeend', cienciaHTML35(datosHistoria32(tipo, id))); } catch (e) { if (typeof dlog === 'function') dlog('✗ ficha científica: ' + e.message, 'err'); } };
+/* Trazabilidad como estaba (lote, cadena y mapa primero) y, a continuación, la ficha científica del lote consultado y las historias */
+const _renderComercial35 = renderComercial; renderComercial = function () { _renderComercial35.apply(this, arguments); try { const host = document.getElementById('co-cuerpo'); if (!host || coSt.tab !== 'traza') return; const gal = host.querySelector('.h34-g'); if (gal) host.appendChild(gal);
+    if (host.querySelector('.c35')) return; const pid = coSt.trazaPartida || ((((ventas.find(v => v.id === coSt.trazaVenta) || {}).partidas || [])[0]) || {}).partidaId; if (!pid || !partidas.find(p => p.id === pid)) return; const H = datosHistoria32('partida', pid); const html = cienciaHTML35(H); if (!html) return;
+    const card = document.createElement('div'); card.className = 'card c35-card'; card.innerHTML = html + `<div class="act-row"><button class="btn primary small" onclick="historia32('partida','${esc(pid)}')">Ver la historia completa</button><button class="btn ghost small" onclick="pasaporte32('partida','${esc(pid)}')">Pasaporte del café (PDF)</button></div>`; if (gal) host.insertBefore(card, gal); else host.appendChild(card); } catch (e) { if (typeof dlog === 'function') dlog('✗ ficha científica en trazabilidad: ' + e.message, 'err'); } };
 
 /* ================= APP SHELL: rutas, títulos, tema, avisos, deshacer ================= */
 const VISTAS = {

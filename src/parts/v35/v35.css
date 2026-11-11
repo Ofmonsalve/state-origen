@@ -1,0 +1,20 @@
+/* ================= v35 · Ficha científica ================= */
+.c35 { margin-top:22px; }
+.c35-cab { display:flex; flex-direction:column; gap:2px; margin-bottom:12px; }
+.c35-k { font:700 11px var(--f-body); letter-spacing:.14em; text-transform:uppercase; color:#b98a35; }
+.c35-cab b { font-size:15px; }
+.c35-g { border-top:1px solid var(--border, rgba(120,120,128,.2)); padding:10px 0; }
+.c35-g summary { cursor:pointer; display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 12px; list-style:none; padding:4px 0; }
+.c35-g summary::-webkit-details-marker { display:none; }
+.c35-g summary::before { content:'›'; display:inline-block; width:14px; color:var(--text-faint); transition:transform .15s ease; font-weight:700; }
+.c35-g[open] summary::before { transform:rotate(90deg); }
+.c35-g summary b { font-size:14.5px; }
+.c35-g summary span { font-size:12px; color:var(--text-faint); }
+.c35-t { width:100%; border-collapse:collapse; margin-top:8px; font-size:13px; }
+.c35-t th { text-align:left; font:600 10.5px var(--f-body); letter-spacing:.06em; text-transform:uppercase; color:var(--text-faint); padding:6px 10px 6px 0; border-bottom:1px solid var(--text); white-space:nowrap; }
+.c35-t td { padding:7px 10px 7px 0; border-bottom:1px solid var(--border, rgba(120,120,128,.16)); vertical-align:top; color:var(--text-soft, var(--text)); }
+.c35-t td:first-child { color:var(--text); font-weight:500; }
+.c35-t td.c35-v { font-weight:700; color:var(--text); font-variant-numeric:tabular-nums; white-space:nowrap; }
+.c35-t .num { text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
+.c35-card .c35 { margin-top:0; }
+@media (prefers-reduced-motion: reduce) { .c35-g summary::before { transition:none; } }
