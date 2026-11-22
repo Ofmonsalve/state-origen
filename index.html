@@ -1840,6 +1840,44 @@ html.i41-abierto, html.i41-abierto body { overflow:hidden; }
 @media (max-width: 640px) { .t42-box { padding:14px 12px !important; width:100vw !important; } .t42-kpis { grid-template-columns:repeat(2, minmax(0, 1fr)); } .t42-kpi { border-right:0; border-bottom:1px solid var(--border, rgba(120,120,128,.2)); } .t42-kpi:nth-child(odd) { border-right:1px solid var(--border, rgba(120,120,128,.2)); } .t42-kpi:nth-last-child(-n+2) { border-bottom:0; }
   .t42-cacc { width:100%; } .t42-cacc .btn { flex:1 1 auto; } .t42-x { position:absolute; top:12px; right:12px; } .t42-cab { position:relative; padding-right:40px; } .t42-dl { grid-template-columns:repeat(2, minmax(0, 1fr)); } }
 
+/* ================= v43 · Un solo lenguaje visual en todos los módulos (el del tablero de la v42) ================= */
+/* Tarjetas y paneles: borde fino, sin sombra, esquinas de 12 px */
+.card, .k19, .kpi, .md24-i, .tz26-pf, .worker-card, .cs-dia, .stat { box-shadow:none !important; }
+.card { border:1px solid var(--border) !important; border-radius:12px !important; padding:14px 16px !important; }
+.card > .title, .card .title { font-size:13.5px !important; font-weight:700; margin-bottom:10px !important; letter-spacing:0 !important; }
+.card .title .sub { font-size:11.5px !important; }
+/* Cifras: una franja con divisiones finas, etiqueta en versalitas, valor sobrio y punto de estado */
+.k19-grid { gap:1px !important; background:var(--border); border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-bottom:14px !important; }
+.k19 { border:0 !important; border-radius:0 !important; padding:10px 12px 11px !important; background:var(--surface) !important; gap:2px !important; }
+.k19-ic { display:none !important; }
+.k19-l { font-size:10.5px !important; font-weight:600 !important; letter-spacing:.06em; text-transform:uppercase; color:var(--text-faint) !important; padding-right:14px !important; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.k19-v { font-family:var(--f-body) !important; font-size:20px !important; font-weight:700 !important; letter-spacing:0 !important; }
+.k19-v small { font-size:11.5px !important; font-weight:600 !important; }
+.k19-s { font-size:11.5px !important; }
+.k19::before { display:none; } .k19.bien::before, .k19.medio::before, .k19.mal::before { display:block; left:auto !important; right:10px; top:12px !important; bottom:auto !important; width:8px !important; height:8px; border-radius:50% !important; }
+/* Tablas: encabezado discreto con regla oscura, filas compactas, números alineados */
+.dtable { font-size:12.5px; font-variant-numeric:tabular-nums; }
+.dtable thead th { font-size:10px !important; font-weight:600 !important; letter-spacing:.06em; text-transform:uppercase; color:var(--text-faint) !important; border-bottom:1px solid var(--text) !important; padding-top:5px !important; padding-bottom:5px !important; background:transparent !important; }
+.dtable tbody td { padding-top:6px !important; padding-bottom:6px !important; }
+.dtable tfoot td { font-weight:700; border-top:1px solid var(--text) !important; }
+/* Pantallas vacías: dicen qué falta y cómo registrarlo */
+.empty { border:1px dashed var(--border-strong) !important; background:transparent !important; text-align:left !important; padding:14px 16px !important; color:var(--text-soft, var(--text-faint)) !important; border-radius:10px !important; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px 14px; }
+.v43-cta { flex:none; } td.tb-na .v43-cta { margin-top:8px; }
+/* Hoy: el saludo ya no ocupa una franja grande */
+.today-hero { padding:12px 16px !important; margin:4px 0 12px !important; min-height:0 !important; border-radius:12px !important; }
+.today-hero::after { display:none !important; } .today-hero .greet { font-size:18px !important; }
+/* La barra de páginas repite el menú lateral: solo se muestra cuando el menú está oculto (celular y tableta) */
+@media (min-width: 1001px) { .subnav27 { display:none !important; } }
+.v43-mas { display:flex; flex-wrap:wrap; align-items:center; gap:6px 8px; margin:0 0 12px; font-size:12px; color:var(--text-faint); }
+.v43-mas button { border:1px solid var(--border); background:transparent; color:var(--text); font:600 12px var(--f-body); padding:5px 10px; border-radius:8px; cursor:pointer; } .v43-mas button:hover { background:var(--surface-2); }
+/* Personal */
+.v43-sc { color:var(--warn, #c76e00) !important; font-weight:600; font-size:11px !important; }
+.v43-neg { display:block; font-size:10.5px; color:var(--text-faint); font-weight:500; }
+/* Indicadores del módulo Análisis con el mismo lenguaje */
+.sc, .stat { border:1px solid var(--border) !important; border-radius:12px !important; background:var(--surface) !important; }
+.sc .n, .stat .num { font-family:var(--f-body) !important; font-weight:700 !important; font-variant-numeric:tabular-nums; }
+.sc .l, .stat .lbl { font-size:10.5px !important; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--text-faint) !important; }
+
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -2518,7 +2556,7 @@ function dlog(msg, tipo) {
   body.appendChild(line);
   body.scrollTop = body.scrollHeight;
 }
-const APP_VERSION = '42.0';
+const APP_VERSION = '43.0';
 let _ultimoError = '', _repeticiones = 0;
 function registrarError(prefijo, err, msg, linea) {
   const pila = err && err.stack ? String(err.stack).split('\n').slice(1, 4).map(l => l.trim().replace(/\(?https?:\/\/[^)]*:(\d+):(\d+)\)?/, 'línea $1')).join(' ← ') : '';
@@ -4197,10 +4235,10 @@ function render() {
     document.getElementById('narrativa').innerHTML = 'Aún no hay cosecha registrada. Usa el botón <b>+</b> para agregar tu primera pasada.';
     document.getElementById('stat-row').innerHTML='';
   } else {
-    document.getElementById('narrativa').innerHTML = `<b>${num(totalKg)} kg</b> recolectados en ${rf.length} registro(s), rendimiento de <b>${kgHora.toFixed(1)} kg/h</b>. Ventas por <b>${fmt(totalVentasValor)}</b>, margen bruto de <b>${fmt(margen)}</b> (${pct(margen,totalVentasValor)}).`;
+    document.getElementById('narrativa').innerHTML = `<b>${num(totalKg)} kg</b> recolectados en ${rf.length} registro(s), rendimiento de <b>${num(redondear(kgHora, 1))} kg/h</b>. Ventas por <b>${fmt(totalVentasValor)}</b>, margen bruto de <b>${fmt(margen)}</b> (${pct(margen,totalVentasValor)}).`;
     document.getElementById('stat-row').innerHTML = `
       <div class="stat"><div class="num">${num(totalKg)}</div><div class="lbl">Kg recolectados</div></div>
-      <div class="stat"><div class="num">${kgHora.toFixed(1)}</div><div class="lbl">Kg por hora</div></div>
+      <div class="stat"><div class="num">${num(redondear(kgHora, 1))}</div><div class="lbl">Kg por hora</div></div>
       <div class="stat"><div class="num">${fmt(totalVentasValor)}</div><div class="lbl">Ventas</div></div>
       <div class="stat"><div class="num">${fmt(margen)}</div><div class="lbl">Margen bruto</div></div>`;
   }
@@ -4242,7 +4280,7 @@ function render() {
       return nombres.map(n=>{ const rows=rf.filter(r=>r.recolector===n); const kg=rows.reduce((a,r)=>a+(Number(r.kg)||0),0); const horas=rows.reduce((a,r)=>a+(Number(r.horas)||0),0);
         const valor = rows.reduce((a,r)=>a+costoRegistro(r),0);
         return `<tr><td>${n}</td><td class="num">${num(kg)}</td><td class="num">${num(horas)}</td><td class="num">${horas>0?(kg/horas).toFixed(1):'—'}</td><td class="num">${fmt(valor)}</td></tr>`; }).join(''); })()}</tbody>
-    <tfoot><tr><td>Total</td><td class="num">${num(totalKg)}</td><td class="num">${num(totalHoras)}</td><td class="num">${kgHora.toFixed(1)}</td><td class="num">${fmt(totalPago)}</td></tr></tfoot>`;
+    <tfoot><tr><td>Total</td><td class="num">${num(totalKg)}</td><td class="num">${num(totalHoras)}</td><td class="num">${num(redondear(kgHora, 1))}</td><td class="num">${fmt(totalPago)}</td></tr></tfoot>`;
 
   let cum=totalVentasValor;
   const steps=[{label:'Ventas',value:totalVentasValor,type:'start',cumBefore:0,cumAfter:totalVentasValor}];
@@ -4293,9 +4331,9 @@ function renderAnalisis() {
 
   document.getElementById('analisis-stats').innerHTML = `
     <div class="sc"><div class="n">${totalDias}</div><div class="l">Días con cosecha registrada</div></div>
-    <div class="sc"><div class="n">${promedioDiario.toFixed(1)} kg</div><div class="l">Promedio diario</div></div>
-    <div class="sc"><div class="n">${desv.toFixed(1)} kg</div><div class="l">Desviación estándar</div></div>
-    <div class="sc"><div class="n">${cv.toFixed(0)}%</div><div class="l">Variabilidad (coef. de variación)</div></div>`;
+    <div class="sc"><div class="n">${num(redondear(promedioDiario, 1))} kg</div><div class="l">Promedio diario</div></div>
+    <div class="sc"><div class="n">${num(redondear(desv, 1))} kg</div><div class="l">Desviación estándar</div></div>
+    <div class="sc"><div class="n">${num(Math.round(cv))}%</div><div class="l">Variabilidad (coef. de variación)</div></div>`;
 
   // Tendencia + proyección
   if (porDia.length >= 2) {
@@ -4344,9 +4382,9 @@ function renderAnalisis() {
   const proyeccion7 = Array.from({length:7},(_,i)=>slope*(kgSerie.length+i)+intercept).reduce((a,b)=>a+Math.max(b,0),0);
   const tendenciaTexto = slope>0.5 ? 'creciente' : (slope<-0.5 ? 'decreciente' : 'estable');
   document.getElementById('analisis-texto').textContent =
-    `Con ${totalDias} día(s) de historial, la cosecha diaria promedia ${promedioDiario.toFixed(1)} kg con una variabilidad del ${cv.toFixed(0)}% ` +
+    `Con ${totalDias} día(s) de historial, la cosecha diaria promedia ${num(redondear(promedioDiario, 1))} kg con una variabilidad del ${num(Math.round(cv))}% ` +
     `(${cv<20?'operación consistente':'operación con variabilidad alta entre días — vale la pena investigar por qué'}). ` +
-    `La tendencia de la regresión lineal es ${tendenciaTexto} (pendiente de ${slope.toFixed(2)} kg/día). ` +
+    `La tendencia de la regresión lineal es ${tendenciaTexto} (pendiente de ${num(redondear(slope, 2))} kg/día). ` +
     (kgSerie.length>=2 ? `Proyectando esa tendencia, los próximos 7 días sumarían aproximadamente ${Math.round(proyeccion7)} kg.` : 'Registra más días para obtener una proyección confiable.');
 }
 
@@ -26852,6 +26890,27 @@ function ventanaDia42(k) { const rs = registros.filter(r => grupoDia(r) === k); 
       ${Dp.length > 1 ? panel42('El día dentro del pase', 'toque una barra para ir a ese día', barrasDia42(Dp, MT.metaKgH, k), 'b2') : ''}
     </div></div>`); }
 ventanaPase39 = ventanaPase42; ventanaDia39 = ventanaDia42; inmersivoPase41 = ventanaPase42; inmersivoDia41 = ventanaDia42;
+
+/* ================= v43 · Orden y consistencia: navegación de dos niveles, Inicio con dos pantallas, Reportes como área propia, pantallas vacías que llevan a registrar ================= */
+(function () { if (typeof AREAS27 === 'undefined') return;
+  const ini = AREAS27.find(a => a.k === 'inicio'); if (ini) { ini.v = ['hoy', 'tablero']; ini.d = 'Lo de hoy y los indicadores de la finca'; }
+  if (!AREAS27.some(a => a.k === 'reportes')) { const i = AREAS27.findIndex(a => a.k === 'finanzas'); AREAS27.splice(i + 1, 0, { k: 'reportes', t: 'Reportes', ic: 'i-reporte', d: 'Informes y descargables en PDF y Excel', v: ['reportes'] }); }
+})();
+/* Vistas que salen del menú pero siguen a un toque: se ofrecen dentro del Tablero y en el buscador */
+function masVistas43() { const v = document.getElementById('view-tablero'); if (!v || v.querySelector('.v43-mas')) return; const h = v.firstElementChild; const html = `<div class="v43-mas"><span>Más vistas de indicadores</span><button type="button" onclick="ir('mando')">Índice de gestión</button><button type="button" onclick="ir('analisis')">Análisis estadístico</button><button type="button" onclick="ir('pendientes')">Puesta al día de datos</button></div>`; if (h) h.insertAdjacentHTML('beforebegin', html); else v.insertAdjacentHTML('afterbegin', html); }
+/* Pantallas vacías: dicen qué falta y ofrecen la acción principal de la página */
+function vacios43(root) { const vista = document.querySelector('.view.active, .view:not([hidden])[id^="view-"]'); (root || document).querySelectorAll('.empty, td.tb-na').forEach(e => { if (e.dataset.v43 || e.closest('.modal-box, #i41')) return; e.dataset.v43 = '1'; if (e.querySelector('button, a')) return;
+    const v = e.closest('[id^="view-"]'); if (!v) return; const C = [...v.querySelectorAll('.btn.primary')].filter(x => !x.closest('.empty, .modal-box, td, .card .modal-actions') && x.offsetParent !== null && !/PDF|Excel|descarg/i.test(x.textContent));
+    const mas = C.filter(x => /^\s*\+/.test(x.textContent)); const antes = mas.filter(x => x.compareDocumentPosition(e) & Node.DOCUMENT_POSITION_FOLLOWING); const b = antes[antes.length - 1] || mas[0] || C[0]; if (!b) return;
+    const t = b.textContent.replace(/^\s*\+\s*/, '').trim(); if (!t || t.length > 40) return; const k = document.createElement('button'); k.type = 'button'; k.className = 'btn ghost small v43-cta'; k.textContent = '+ ' + t.charAt(0).toUpperCase() + t.slice(1); k.onclick = ev => { ev.stopPropagation(); b.click(); };
+    if (e.tagName === 'TD') { e.appendChild(document.createElement('br')); e.appendChild(k); } else e.appendChild(k); }); }
+const _pase43 = pase27; pase27 = function (root) { if (!root) return; _pase43(root); try { vacios43(root); } catch (e) {} };
+const _showView43 = showView; showView = function (name) { const r = _showView43.apply(this, arguments); try { if (name === 'tablero') masVistas43(); } catch (e) {} return r; };
+/* Personal: el aviso de cédula pasa a ser una marca discreta y el saldo negativo se explica */
+function personal43(root) { (root || document).querySelectorAll('#lista-trabajadores .worker-card, .p27-fila').forEach(c => { if (c.dataset.v43) return; c.dataset.v43 = '1';
+  c.querySelectorAll('span, small, i').forEach(s => { if (/sin c[eé]dula/i.test(s.textContent) && s.children.length === 0) { s.classList.add('v43-sc'); s.textContent = 'falta cédula'; s.title = 'Sin cédula registrada: el código de trazabilidad de esta persona usa 00. Agréguela en Editar.'; } });
+  c.querySelectorAll('b, strong, span').forEach(s => { if (s.children.length === 0 && /^-\$/.test(s.textContent.trim().replace(/\s/g, '')) && !s.dataset.v43) { s.dataset.v43 = '1'; s.title = 'Saldo a favor de la finca: los anticipos superan lo ganado y se descuentan de la próxima liquidación.'; s.insertAdjacentHTML('afterend', '<small class="v43-neg">anticipo por descontar</small>'); } }); }); }
+const _pase43b = pase27; pase27 = function (root) { if (!root) return; _pase43b(root); try { personal43(root); } catch (e) {} };
 
 /* ================= APP SHELL: rutas, títulos, tema, avisos, deshacer ================= */
 const VISTAS = {

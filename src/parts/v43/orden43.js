@@ -1,0 +1,20 @@
+/* ================= v43 · Orden y consistencia: navegación de dos niveles, Inicio con dos pantallas, Reportes como área propia, pantallas vacías que llevan a registrar ================= */
+(function () { if (typeof AREAS27 === 'undefined') return;
+  const ini = AREAS27.find(a => a.k === 'inicio'); if (ini) { ini.v = ['hoy', 'tablero']; ini.d = 'Lo de hoy y los indicadores de la finca'; }
+  if (!AREAS27.some(a => a.k === 'reportes')) { const i = AREAS27.findIndex(a => a.k === 'finanzas'); AREAS27.splice(i + 1, 0, { k: 'reportes', t: 'Reportes', ic: 'i-reporte', d: 'Informes y descargables en PDF y Excel', v: ['reportes'] }); }
+})();
+/* Vistas que salen del menú pero siguen a un toque: se ofrecen dentro del Tablero y en el buscador */
+function masVistas43() { const v = document.getElementById('view-tablero'); if (!v || v.querySelector('.v43-mas')) return; const h = v.firstElementChild; const html = `<div class="v43-mas"><span>Más vistas de indicadores</span><button type="button" onclick="ir('mando')">Índice de gestión</button><button type="button" onclick="ir('analisis')">Análisis estadístico</button><button type="button" onclick="ir('pendientes')">Puesta al día de datos</button></div>`; if (h) h.insertAdjacentHTML('beforebegin', html); else v.insertAdjacentHTML('afterbegin', html); }
+/* Pantallas vacías: dicen qué falta y ofrecen la acción principal de la página */
+function vacios43(root) { const vista = document.querySelector('.view.active, .view:not([hidden])[id^="view-"]'); (root || document).querySelectorAll('.empty, td.tb-na').forEach(e => { if (e.dataset.v43 || e.closest('.modal-box, #i41')) return; e.dataset.v43 = '1'; if (e.querySelector('button, a')) return;
+    const v = e.closest('[id^="view-"]'); if (!v) return; const C = [...v.querySelectorAll('.btn.primary')].filter(x => !x.closest('.empty, .modal-box, td, .card .modal-actions') && x.offsetParent !== null && !/PDF|Excel|descarg/i.test(x.textContent));
+    const mas = C.filter(x => /^\s*\+/.test(x.textContent)); const antes = mas.filter(x => x.compareDocumentPosition(e) & Node.DOCUMENT_POSITION_FOLLOWING); const b = antes[antes.length - 1] || mas[0] || C[0]; if (!b) return;
+    const t = b.textContent.replace(/^\s*\+\s*/, '').trim(); if (!t || t.length > 40) return; const k = document.createElement('button'); k.type = 'button'; k.className = 'btn ghost small v43-cta'; k.textContent = '+ ' + t.charAt(0).toUpperCase() + t.slice(1); k.onclick = ev => { ev.stopPropagation(); b.click(); };
+    if (e.tagName === 'TD') { e.appendChild(document.createElement('br')); e.appendChild(k); } else e.appendChild(k); }); }
+const _pase43 = pase27; pase27 = function (root) { if (!root) return; _pase43(root); try { vacios43(root); } catch (e) {} };
+const _showView43 = showView; showView = function (name) { const r = _showView43.apply(this, arguments); try { if (name === 'tablero') masVistas43(); } catch (e) {} return r; };
+/* Personal: el aviso de cédula pasa a ser una marca discreta y el saldo negativo se explica */
+function personal43(root) { (root || document).querySelectorAll('#lista-trabajadores .worker-card, .p27-fila').forEach(c => { if (c.dataset.v43) return; c.dataset.v43 = '1';
+  c.querySelectorAll('span, small, i').forEach(s => { if (/sin c[eé]dula/i.test(s.textContent) && s.children.length === 0) { s.classList.add('v43-sc'); s.textContent = 'falta cédula'; s.title = 'Sin cédula registrada: el código de trazabilidad de esta persona usa 00. Agréguela en Editar.'; } });
+  c.querySelectorAll('b, strong, span').forEach(s => { if (s.children.length === 0 && /^-\$/.test(s.textContent.trim().replace(/\s/g, '')) && !s.dataset.v43) { s.dataset.v43 = '1'; s.title = 'Saldo a favor de la finca: los anticipos superan lo ganado y se descuentan de la próxima liquidación.'; s.insertAdjacentHTML('afterend', '<small class="v43-neg">anticipo por descontar</small>'); } }); }); }
+const _pase43b = pase27; pase27 = function (root) { if (!root) return; _pase43b(root); try { personal43(root); } catch (e) {} };

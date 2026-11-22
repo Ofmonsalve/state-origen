@@ -1,0 +1,37 @@
+/* ================= v43 · Un solo lenguaje visual en todos los módulos (el del tablero de la v42) ================= */
+/* Tarjetas y paneles: borde fino, sin sombra, esquinas de 12 px */
+.card, .k19, .kpi, .md24-i, .tz26-pf, .worker-card, .cs-dia, .stat { box-shadow:none !important; }
+.card { border:1px solid var(--border) !important; border-radius:12px !important; padding:14px 16px !important; }
+.card > .title, .card .title { font-size:13.5px !important; font-weight:700; margin-bottom:10px !important; letter-spacing:0 !important; }
+.card .title .sub { font-size:11.5px !important; }
+/* Cifras: una franja con divisiones finas, etiqueta en versalitas, valor sobrio y punto de estado */
+.k19-grid { gap:1px !important; background:var(--border); border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-bottom:14px !important; }
+.k19 { border:0 !important; border-radius:0 !important; padding:10px 12px 11px !important; background:var(--surface) !important; gap:2px !important; }
+.k19-ic { display:none !important; }
+.k19-l { font-size:10.5px !important; font-weight:600 !important; letter-spacing:.06em; text-transform:uppercase; color:var(--text-faint) !important; padding-right:14px !important; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.k19-v { font-family:var(--f-body) !important; font-size:20px !important; font-weight:700 !important; letter-spacing:0 !important; }
+.k19-v small { font-size:11.5px !important; font-weight:600 !important; }
+.k19-s { font-size:11.5px !important; }
+.k19::before { display:none; } .k19.bien::before, .k19.medio::before, .k19.mal::before { display:block; left:auto !important; right:10px; top:12px !important; bottom:auto !important; width:8px !important; height:8px; border-radius:50% !important; }
+/* Tablas: encabezado discreto con regla oscura, filas compactas, números alineados */
+.dtable { font-size:12.5px; font-variant-numeric:tabular-nums; }
+.dtable thead th { font-size:10px !important; font-weight:600 !important; letter-spacing:.06em; text-transform:uppercase; color:var(--text-faint) !important; border-bottom:1px solid var(--text) !important; padding-top:5px !important; padding-bottom:5px !important; background:transparent !important; }
+.dtable tbody td { padding-top:6px !important; padding-bottom:6px !important; }
+.dtable tfoot td { font-weight:700; border-top:1px solid var(--text) !important; }
+/* Pantallas vacías: dicen qué falta y cómo registrarlo */
+.empty { border:1px dashed var(--border-strong) !important; background:transparent !important; text-align:left !important; padding:14px 16px !important; color:var(--text-soft, var(--text-faint)) !important; border-radius:10px !important; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px 14px; }
+.v43-cta { flex:none; } td.tb-na .v43-cta { margin-top:8px; }
+/* Hoy: el saludo ya no ocupa una franja grande */
+.today-hero { padding:12px 16px !important; margin:4px 0 12px !important; min-height:0 !important; border-radius:12px !important; }
+.today-hero::after { display:none !important; } .today-hero .greet { font-size:18px !important; }
+/* La barra de páginas repite el menú lateral: solo se muestra cuando el menú está oculto (celular y tableta) */
+@media (min-width: 1001px) { .subnav27 { display:none !important; } }
+.v43-mas { display:flex; flex-wrap:wrap; align-items:center; gap:6px 8px; margin:0 0 12px; font-size:12px; color:var(--text-faint); }
+.v43-mas button { border:1px solid var(--border); background:transparent; color:var(--text); font:600 12px var(--f-body); padding:5px 10px; border-radius:8px; cursor:pointer; } .v43-mas button:hover { background:var(--surface-2); }
+/* Personal */
+.v43-sc { color:var(--warn, #c76e00) !important; font-weight:600; font-size:11px !important; }
+.v43-neg { display:block; font-size:10.5px; color:var(--text-faint); font-weight:500; }
+/* Indicadores del módulo Análisis con el mismo lenguaje */
+.sc, .stat { border:1px solid var(--border) !important; border-radius:12px !important; background:var(--surface) !important; }
+.sc .n, .stat .num { font-family:var(--f-body) !important; font-weight:700 !important; font-variant-numeric:tabular-nums; }
+.sc .l, .stat .lbl { font-size:10.5px !important; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--text-faint) !important; }

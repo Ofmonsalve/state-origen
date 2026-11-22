@@ -10,8 +10,8 @@ const tick = (ms = 80) => new Promise(r => setTimeout(r, ms)); const descargas =
   await tick(1500); const w = dom.window, d = w.document, E = s => w.eval(s);
   // Menú por áreas
   w.ir('panel'); await tick(150);
-  ok(d.querySelectorAll('.nav27 .area27').length === 7 && d.querySelectorAll('.sidebar .nav-group').length === 0, 'El menú lateral pasa de 22 entradas en 6 grupos a 7 áreas');
-  ok(d.querySelectorAll('.nav27 .nav-item[data-nav]').length === Object.keys(E('VISTAS')).length, 'Todas las páginas siguen en el menú, dentro de su área');
+  ok(d.querySelectorAll('.nav27 .area27').length === 8 && d.querySelectorAll('.sidebar .nav-group').length === 0, 'El menú lateral tiene 8 áreas (v43: Reportes como área propia)');
+  ok(d.querySelectorAll('.nav27 .nav-item[data-nav]').length === Object.keys(E('VISTAS')).length - 3 && ['mando', 'analisis', 'pendientes'].every(v => !d.querySelector('.nav27 .nav-item[data-nav="' + v + '"]')), 'Todas las páginas están en el menú salvo Índice, Análisis y Puesta al día, que se abren desde el Tablero (v43)');
   ok(d.querySelector('.area27[data-area="cosecha"]').classList.contains('abierta') && !d.querySelector('.area27[data-area="cultivo"]').classList.contains('abierta'), 'Solo se despliega el área en la que está');
   ok(d.getElementById('eyebrow27').textContent.includes('Cosecha y personal') && [...d.querySelectorAll('#subnav27 button')].map(b => b.textContent.trim()).join('|') === 'Cosecha|Personal', 'Antetítulo del área y subnavegación Cosecha | Personal');
   w.clicArea27('cultivo'); await tick(150); ok(E('vistaActual') === 'mapa' && d.querySelectorAll('#subnav27 button').length === 6, 'Tocar un área abre su primera página y muestra sus 6 páginas');
@@ -48,7 +48,7 @@ const tick = (ms = 80) => new Promise(r => setTimeout(r, ms)); const descargas =
   const txt = f ? await new Promise(r => { const fr = new w.FileReader(); fr.onload = () => r(fr.result); fr.readAsText(f.data); }) : ''; const lin = txt.replace(/^﻿/, '').split('\r\n');
   ok(f && /\.csv$/.test(f.filename) && lin[0].startsWith('Ciclo · pasada;Lote;Fechas') && lin.length === 6 && !/Planilla PDF/.test(txt), 'CSV para Excel: encabezados, 5 pases, separador «;» y sin botones');
   // Móvil: «Más» con todas las secciones
-  let hoja = null; const _h = w.hojaAcciones; w.eval('hojaAcciones = (t, items) => { window.__hoja = { t, n: items.length }; }'); w.abrirMas(); hoja = w.__hoja; ok(hoja && hoja.n === Object.keys(E('VISTAS')).length, 'En el celular, «Más» lista las ' + (hoja && hoja.n) + ' páginas por área');
+  let hoja = null; const _h = w.hojaAcciones; w.eval('hojaAcciones = (t, items) => { window.__hoja = { t, n: items.length }; }'); w.abrirMas(); hoja = w.__hoja; ok(hoja && hoja.n === Object.keys(E('VISTAS')).length - 3, 'En el celular, «Más» lista las ' + (hoja && hoja.n) + ' páginas por área');
   // Sin regresiones visibles
   for (const v of Object.keys(E('VISTAS'))) { w.ir(v); await tick(60); } ok(errores.length === 0 && !/✗/.test(E("(document.getElementById('debug-log')||{}).textContent || ''")), 'Todas las páginas abren sin errores' + (errores.length ? ': ' + errores.slice(0, 3).join(' / ') : ''));
 })().catch(e => { console.error('✗ EXCEPCIÓN', e); process.exitCode = 1; });

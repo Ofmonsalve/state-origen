@@ -11,7 +11,7 @@ const tick = (ms = 80) => new Promise(r => setTimeout(r, ms));
   ok(E("pasos30().every((p, i, a) => !i || FASES30.indexOf(a[i-1].fase) <= FASES30.indexOf(p.fase))"), 'Los pasos van por etapas: finca → personas → cosecha → beneficio → pagos → control');
   ok(d.querySelector('#hoy-setup .pd30-hoy') && d.getElementById('hoy-setup').nextElementSibling.classList.contains('quick'), 'Hoy muestra «Complete sus datos» arriba, con el siguiente paso');
   w.ir('pendientes'); await tick(200); ok(d.querySelector('#pd30-root .pd30-hero') && d.querySelectorAll('.pd30-i').length === P0.length, 'Página «Puesta al día» con el avance y todos los pasos');
-  ok(d.querySelector('.nav-item[data-nav="pendientes"]').closest('.area27[data-area="inicio"]'), 'Está en el menú, dentro de Inicio');
+  w.ir('tablero'); await tick(300); ok(d.querySelector('.v43-mas button[onclick="ir(\'pendientes\')"]'), 'Se abre desde el Tablero (v43) y desde la tarjeta de Hoy'); w.ir('hoy'); await tick(200);
   w.iniciarGuia30(); await tick(150); const g = d.getElementById('guia30'); ok(g && /Cédula de/.test(g.textContent) && /paso 1 de/.test(g.textContent), 'La guía flotante muestra el paso 1');
   w.accionGuia30(); await tick(450); const inp = d.getElementById('ed-documento'); ok(inp && inp.closest('.resalta30'), '«Hacerlo ahora» abre el formulario exacto y resalta el campo Cédula');
   inp.value = '1098765432'; [...d.querySelectorAll('.modal-box button')].find(x => /Guardar/.test(x.textContent)).click(); await tick(500);
