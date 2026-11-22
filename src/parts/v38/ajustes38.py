@@ -1,0 +1,5 @@
+rep("const APP_VERSION = '37.0';", "const APP_VERSION = '38.0';")
+rep("  R.nota('Contabilidad de gestión generada automáticamente a partir de la cosecha, labores, ventas, nómina, activos y movimientos registrados. No reemplaza los estados financieros certificados por un contador público.', 'info');\n  R.guardar(nombreArchivo('estados-financieros-' + an));", "  try { analisisFinanciero38(R, an, er, ep, bg, I); } catch (e) { if (typeof dlog === 'function') dlog('✗ análisis financiero: ' + e.message, 'err'); }\n  R.nota('Contabilidad de gestión generada automáticamente a partir de la cosecha, labores, ventas, nómina, activos y movimientos registrados. No reemplaza los estados financieros certificados por un contador público.', 'info');\n  R.guardar(nombreArchivo('estados-financieros-' + an));")
+# El semáforo de indicadores reemplaza la tabla plana de indicadores (sin repetir cifras)
+_a = s.index("  R.seccion(3, 'Indicadores financieros');"); _b = s.index("  try { analisisFinanciero38(R, an, er, ep, bg, I); }")
+assert _b > _a and _b - _a < 3000, (_a, _b); s = s[:_a] + s[_b:]

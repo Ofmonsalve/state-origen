@@ -3,6 +3,6 @@
 set -e
 cd "$(dirname "$0")/src"
 [ -d node_modules ] || npm ci
-python3 merge37.py
-cp state-origen-v37.html ../index.html
+python3 merge38.py
+cp state-origen-v38.html ../index.html
 echo "Listo: index.html"
