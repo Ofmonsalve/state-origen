@@ -14,13 +14,13 @@ const tick = (ms = 80) => new Promise(r => setTimeout(r, ms)); const desc = [];
   w.ir('panel'); await tick(300); const bar = d.querySelector('#view-panel .cs-bar .mp-actions');
   const vb = [...bar.querySelectorAll('button')].filter(b => !b.classList.contains('a27-oculto')); ok(vb.length === 2 && vb[0].textContent.includes('Registrar día') && vb[1].classList.contains('acc29'), 'Cosecha: «+ Registrar día de cosecha» y «⋯» (antes 3 botones)');
   vb[1].click(); await tick(); const mi = [...d.querySelectorAll('.menu27 button')].map(b => b.textContent); ok(mi.join('|') === 'Parámetros de pago|Registrar beneficio', 'El «⋯» ofrece Parámetros de pago y Registrar beneficio'); w.cerrarMenu27();
-  const nPanel = visibles('#view-panel').length; ok(nPanel <= 16, 'Botones visibles en Cosecha: ' + nPanel + ' (eran 261 en la v26)');
+  const nPanel = visibles('#view-panel').length; ok(nPanel <= 18, 'Botones visibles en Cosecha: ' + nPanel + ' (eran 261 en la v26; incluye «Ver el día» de la v39)');
   // Filas que se tocan
   const filaPase = [...d.querySelectorAll('#view-panel tr.fila29')].find(tr => /26P-P05/.test(tr.textContent)); ok(filaPase && filaPase.querySelector('.chev29'), 'Cada pase es una fila que se toca, con «›»');
-  const n0 = desc.length; filaPase.children[1].click(); await tick(500); ok(desc.length === n0 + 1 && /planilla/.test(desc[desc.length - 1].filename), 'Tocar la fila del pase descarga su planilla');
+  const n0 = desc.length; filaPase.children[1].click(); await tick(500); ok(desc.length === n0 && (d.querySelector('#modal-box .w39-hero') || {}).textContent, 'Tocar la fila del pase abre su ventana (v39) y no descarga nada'); w.closeModal();
   const dia = d.querySelector('#cs-dias .cs-dia:not(.cerrado)'); const fp = dia.querySelector('tbody tr'); ok(fp.classList.contains('fila29') && fp.querySelector('.acc27'), 'Cada pesada: la fila abre «Editar» y «⋯» guarda Historial y Eliminar');
   fp.children[1].click(); await tick(150); ok(/Editar|Corregir|pesada/i.test((d.querySelector('.modal-box') || {}).textContent || ''), 'Tocar la pesada abre su edición'); try { w.closeModal(); } catch (e) {}
-  ok(dia.querySelector('.cs-dia-a .acc29') && !dia.querySelector('.cs-dia-a > button:not(.a27-oculto):not(.acc29)'), 'El encabezado del día solo muestra «⋯» (Ajustar y Eliminar dentro)');
+  ok(dia.querySelector('.cs-dia-a .acc29') && dia.querySelectorAll('.cs-dia-a > button:not(.a27-oculto):not(.acc29)').length === 1 && dia.querySelector('.cs-dia-a .w39-ver'), 'El encabezado del día muestra «Ver el día» y «⋯» (Ajustar y Eliminar dentro)');
   // Personal
   w.ir('personal'); await tick(300); const head = d.querySelector('#lista-trabajadores .worker-head'); ok(head.querySelector('.acc29') && ![...head.querySelectorAll('span.b29 > button')].some(b => !b.classList.contains('a27-oculto') && !b.classList.contains('acc29')), 'Personal: Editar y Eliminar quedan en «⋯»');
   // Centro de mando y alertas
