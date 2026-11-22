@@ -1,0 +1,6 @@
+/* ================= v37 · Lector QR ================= */
+#qr37-btn svg { width:20px; height:20px; }
+.q37-acc { display:flex; flex-wrap:wrap; gap:8px; margin:6px 0 12px; } .q37-acc .btn { flex:1 1 200px; min-height:48px; }
+.q37-in { display:flex; gap:8px; margin-top:8px; } .q37-in input { flex:1; min-width:0; }
+.q37-msg { display:flex; flex-direction:column; gap:4px; padding:12px 14px; border-radius:12px; background:var(--surface-2, rgba(120,120,128,.1)); font-size:13.5px; line-height:1.45; }
+.q37-msg b { font-size:15px; word-break:break-word; } .q37-msg.mal { background:rgba(215,40,35,.1); color:var(--danger, #d72823); } .q37-msg.ok { background:rgba(30,132,73,.1); }

@@ -12,7 +12,7 @@ function abrir(db) { const errores = []; const dom = new JSDOM(html, { runScript
     Object.defineProperty(w, 'localStorage', { value: { getItem: k => k in almacen ? almacen[k] : null, setItem: (k, v) => { almacen[k] = String(v); }, removeItem: k => { delete almacen[k]; } } });
     w.addEventListener('error', e => errores.push(e.message)); w.HTMLCanvasElement.prototype.getContext = () => null; w.matchMedia = () => ({ matches: false, addEventListener() {}, removeEventListener() {} }); w.scrollTo = () => {}; w.Element.prototype.scrollIntoView = function () {}; } }); dom.errores = errores; return dom; }
 (async () => {
-  const store = { 'datos/maestros': { fincas: [{ id: 'f1', nombre: 'El Tesoro' }], variedades: [], lotes: [{ id: 'l1', nombre: 'Uno', fincaId: 'f1', hectareas: 0.35 }], bloques: [], trabajadores: [{ id: 't1', nombre: 'Walter', documento: '1' }], empleados: [], activos: [] }, 'datos/finanzas': { insumos: [], ventas: [], beneficios: [], labores: [{ id: 'lb1', fecha: '2026-11-01', loteId: 'l1', tipo: 'Podas', costo: 50000 }], adelantos: [], pagos: [] },
+  const store = { 'datos/maestros': { fincas: [{ id: 'f1', nombre: 'El Tesoro' }], variedades: [], lotes: [{ id: 'l1', nombre: 'Uno', fincaId: 'f1', hectareas: 0.35 }], bloques: [], trabajadores: [{ id: 't1', nombre: 'Wilson', documento: '1' }], empleados: [], activos: [] }, 'datos/finanzas': { insumos: [], ventas: [], beneficios: [], labores: [{ id: 'lb1', fecha: '2026-11-01', loteId: 'l1', tipo: 'Podas', costo: 50000 }], adelantos: [], pagos: [] },
     'ordenes/2026-11': { items: [{ id: 'o1', numero: 'OT-0007', estado: 'Programada', fechaProgramada: '2026-11-10', loteId: 'l1', tipo: 'Podas', presupuesto: { total: 100000, jornales: 1 } }] } };
   // 1) Sin nube
   let dom = abrir(null); await tick(1800); let w = dom.window, d = w.document, E = s => w.eval(s);
@@ -21,7 +21,7 @@ function abrir(db) { const errores = []; const dom = new JSDOM(html, { runScript
   ok(almacen['so-pendiente-nube'] && JSON.parse(almacen['so-pendiente-nube']).estado.trabajadores.some(t => t.id === 'tLocal'), 'Lo registrado sin nube queda en espera en este equipo');
   ok(/sin conexión a la nube/i.test((d.querySelector('.modal-box') || {}).textContent || ''), 'Al primer guardado sin nube se avisa claramente con opción de descargar respaldo');
   // 2) Vuelve la nube: ofrece subir sin pisar lo de la nube
-  dom = abrir(nube(store)); await tick(2600); w = dom.window; d = w.document; const E2 = s => w.eval(s);
+  dom = abrir(nube(store)); for (let i = 0; i < 20 && !/no se habían subido/.test((dom.window.document.querySelector('.modal-box') || {}).textContent || ''); i++) await tick(300); w = dom.window; d = w.document; const E2 = s => w.eval(s);
   ok(/no se habían subido/.test((d.querySelector('.modal-box') || {}).textContent || '') && /1 nuevo/.test(d.querySelector('.modal-box').textContent), 'Con nube: ofrece subir los datos que quedaron en espera (1 persona nueva)');
   w.subir31(); await tick(800); ok(store['datos/maestros'].trabajadores.length === 2 && store['datos/maestros'].trabajadores.some(t => t.id === 'tLocal') && store['datos/maestros'].trabajadores.some(t => t.id === 't1') && !almacen['so-pendiente-nube'], 'Se suben y se unen con lo de la nube; la espera se limpia');
   ok(!d.getElementById('nube31') && /Sincronizado/.test(d.getElementById('sync-label').textContent), 'Con nube: sin aviso y estado «Sincronizado · hora»');
